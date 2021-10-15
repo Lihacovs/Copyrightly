@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "831946465997",
+    "project_id": "copyrightly-b5cbb",
+    "storage_bucket": "copyrightly-b5cbb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:831946465997:android:6a9feed25de0dbe0993f84",
+        "android_client_info": {
+          "package_name": "eu.balticit.copyrightly"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "831946465997-atukc9mmm4hhff411r0l6jgg1r4nq8ds.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC_noan0m0oyYYA-Xzr647zldJemmVRkgg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "831946465997-atukc9mmm4hhff411r0l6jgg1r4nq8ds.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

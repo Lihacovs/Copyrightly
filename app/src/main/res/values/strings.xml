@@ -11,6 +11,15 @@
     <string name="app_creator" translatable="false">Created by: Baltic Information Technologies for Copyrightly app</string>
     <string name="app_version" translatable="false">( Version %1$s )</string>
 
+    <!--play store-->
+    <string name="app_google_play_store_link">"https://play.google.com/store/apps/details?id="</string>
+    <string name="app_market_link">"market://details?id="</string>
+
+    <!--ui.about.About-->
+    <string name="email_subject">Suggestion to improve App</string>
+    <string name="email_body">Enter your message here</string>
+    <string name="email_chooser_title">Send Email</string>
+
     <!--res.menu.activity_main_drawer-->
     <string name="menu_home">Home</string>
     <string name="menu_complain">Complain</string>

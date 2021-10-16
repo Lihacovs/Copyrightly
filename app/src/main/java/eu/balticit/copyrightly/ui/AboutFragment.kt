@@ -4,14 +4,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.snackbar.Snackbar
 import eu.balticit.copyrightly.BuildConfig
 import eu.balticit.copyrightly.R
 import eu.balticit.copyrightly.databinding.FragmentAboutBinding
+import eu.balticit.copyrightly.utils.AppUtils
 import eu.balticit.copyrightly.viewmodels.AboutViewModel
 
 class AboutFragment : Fragment() {
@@ -27,7 +26,7 @@ class AboutFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         aboutViewModel =
             ViewModelProvider(this).get(AboutViewModel::class.java)
 
@@ -46,12 +45,25 @@ class AboutFragment : Fragment() {
         binding.ivAboutSendEmail.setOnClickListener { view ->
             Snackbar.make(view, "Opens email to send to developer", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show()
+
+            AppUtils.composeEmail(
+                this.requireContext(),
+                arrayOf(getString(R.string.app_email)),
+                getString(R.string.email_subject)
+            )
+
         }
 
         //Opens GooglePlay to rate app
         binding.ivAboutSendRate.setOnClickListener { view ->
-            Snackbar.make(view, "Opens GooglePlay to rate app", Snackbar.LENGTH_LONG)
+            Snackbar.make(
+                view,
+                "Package name: " + this.requireContext().packageName,
+                Snackbar.LENGTH_LONG
+            )
                 .setAction("Action", null).show()
+
+            AppUtils.openPlayStoreForApp(this.requireContext())
         }
 
         /*val textView: TextView = binding.tcAboutAppVersion

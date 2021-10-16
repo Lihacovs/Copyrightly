@@ -7,43 +7,43 @@
 
     <fragment
         android:id="@+id/nav_home"
-        android:name="eu.balticit.copyrightly.ui.home.HomeFragment"
+        android:name="eu.balticit.copyrightly.ui.HomeFragment"
         android:label="@string/menu_home"
         tools:layout="@layout/fragment_home" />
 
     <fragment
         android:id="@+id/nav_complain"
-        android:name="eu.balticit.copyrightly.ui.complain.ComplainFragment"
+        android:name="eu.balticit.copyrightly.ui.ComplainFragment"
         android:label="@string/menu_complain"
         tools:layout="@layout/fragment_complain" />
 
     <fragment
         android:id="@+id/nav_learn"
-        android:name="eu.balticit.copyrightly.ui.learn.LearnFragment"
+        android:name="eu.balticit.copyrightly.ui.LearnFragment"
         android:label="@string/menu_learn"
         tools:layout="@layout/fragment_learn" />
 
     <fragment
         android:id="@+id/nav_profile"
-        android:name="eu.balticit.copyrightly.ui.profile.ProfileFragment"
+        android:name="eu.balticit.copyrightly.ui.ProfileFragment"
         android:label="@string/menu_profile"
         tools:layout="@layout/fragment_profile" />
 
     <fragment
         android:id="@+id/nav_about"
-        android:name="eu.balticit.copyrightly.ui.about.AboutFragment"
+        android:name="eu.balticit.copyrightly.ui.AboutFragment"
         android:label="@string/menu_about"
         tools:layout="@layout/fragment_about" />
 
     <fragment
         android:id="@+id/nav_rate"
-        android:name="eu.balticit.copyrightly.ui.rate.RateFragment"
+        android:name="eu.balticit.copyrightly.ui.RateFragment"
         android:label="@string/menu_rate"
         tools:layout="@layout/fragment_rate" />
 
     <fragment
         android:id="@+id/nav_login"
-        android:name="eu.balticit.copyrightly.ui.login.LoginFragment"
+        android:name="eu.balticit.copyrightly.ui.LoginFragment"
         android:label="@string/menu_login"
         tools:layout="@layout/fragment_login" />
 </navigation>

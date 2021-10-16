@@ -1,4 +1,4 @@
-package eu.balticit.copyrightly.ui.learn
+package eu.balticit.copyrightly.ui
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import eu.balticit.copyrightly.databinding.FragmentLearnBinding
+import eu.balticit.copyrightly.viewmodels.LearnViewModel
 
 class LearnFragment : Fragment() {
 

@@ -1,13 +1,13 @@
-package eu.balticit.copyrightly.ui.login
+package eu.balticit.copyrightly.viewmodels
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class LoginViewModel : ViewModel() {
+class RateViewModel : ViewModel() {
 
     private val _text = MutableLiveData<String>().apply {
-        value = "This is Login Fragment"
+        value = "This is Rate Fragment"
     }
     val text: LiveData<String> = _text
 }

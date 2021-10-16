@@ -1,13 +1,13 @@
-package eu.balticit.copyrightly.ui.profile
+package eu.balticit.copyrightly.viewmodels
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class ProfileViewModel : ViewModel() {
+class AboutViewModel : ViewModel() {
 
     private val _text = MutableLiveData<String>().apply {
-        value = "This is Profile Fragment"
+        value = "This is About Fragment"
     }
     val text: LiveData<String> = _text
 }

@@ -1,13 +1,13 @@
-package eu.balticit.copyrightly.ui.complain
+package eu.balticit.copyrightly.viewmodels
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class ComplainViewModel : ViewModel() {
+class HomeViewModel : ViewModel() {
 
     private val _text = MutableLiveData<String>().apply {
-        value = "This is Complain Fragment"
+        value = "This is home Fragment"
     }
     val text: LiveData<String> = _text
 }

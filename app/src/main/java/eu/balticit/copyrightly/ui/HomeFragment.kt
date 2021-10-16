@@ -1,4 +1,4 @@
-package eu.balticit.copyrightly.ui.complain
+package eu.balticit.copyrightly.ui
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,12 +8,13 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import eu.balticit.copyrightly.databinding.FragmentComplainBinding
+import eu.balticit.copyrightly.databinding.FragmentHomeBinding
+import eu.balticit.copyrightly.viewmodels.HomeViewModel
 
-class ComplainFragment : Fragment() {
+class HomeFragment : Fragment() {
 
-    private lateinit var complainViewModel: ComplainViewModel
-    private var _binding: FragmentComplainBinding? = null
+    private lateinit var homeViewModel: HomeViewModel
+    private var _binding: FragmentHomeBinding? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -24,14 +25,14 @@ class ComplainFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        complainViewModel =
-            ViewModelProvider(this).get(ComplainViewModel::class.java)
+        homeViewModel =
+            ViewModelProvider(this).get(HomeViewModel::class.java)
 
-        _binding = FragmentComplainBinding.inflate(inflater, container, false)
+        _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.textComplain
-        complainViewModel.text.observe(viewLifecycleOwner, Observer {
+        val textView: TextView = binding.textHome
+        homeViewModel.text.observe(viewLifecycleOwner, Observer {
             textView.text = it
         })
         return root

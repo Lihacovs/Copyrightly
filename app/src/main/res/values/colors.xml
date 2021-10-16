@@ -8,7 +8,15 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
-    <color name="YouTube_red">#FF0000</color>
-    <color name="YouTube_red_2">#ff3232</color>
+    <color name="YouTube_red_1">#FFE6E6</color>
+    <color name="YouTube_red_2">#FFCCCC</color>
+    <color name="YouTube_red_3">#FFB3B3</color>
+    <color name="YouTube_red_4">#FF9999</color>
+    <color name="YouTube_red_5">#FF8080</color>
+    <color name="YouTube_red_6">#FF6666</color>
+    <color name="YouTube_red_7">#FF4D4D</color>
+    <color name="YouTube_red_8">#FF3333</color>
+    <color name="YouTube_red_9">#FF0000</color>
+
     <color name="almost_black">#282828</color>
 </resources>

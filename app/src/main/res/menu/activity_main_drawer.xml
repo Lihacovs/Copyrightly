@@ -31,5 +31,10 @@
             android:id="@+id/nav_login"
             android:icon="@drawable/ic_circle_login_24px"
             android:title="@string/menu_login" />
+
+        <item
+            android:id="@+id/nav_logout"
+            android:icon="@drawable/ic_circle_logout_24px"
+            android:title="@string/menu_logout" />
     </group>
 </menu>

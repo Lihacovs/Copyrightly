@@ -1,7 +1,9 @@
 package eu.balticit.copyrightly
 
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
+import android.view.MenuItem
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.navigation.NavigationView
 import androidx.navigation.findNavController
@@ -11,12 +13,18 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.appcompat.app.AppCompatActivity
+import eu.balticit.copyrightly.data.AppRepositoryManager
+import eu.balticit.copyrightly.data.RepositoryManager
+import eu.balticit.copyrightly.data.firebase.AppFirebaseHelper
+import eu.balticit.copyrightly.data.firebase.FirebaseHelper
 import eu.balticit.copyrightly.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
+    private var repositoryManager: AppRepositoryManager =
+        AppRepositoryManager(this, AppFirebaseHelper())
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,6 +51,27 @@ class MainActivity : AppCompatActivity() {
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+
+        val userId = repositoryManager.getFirebaseUserId().toString()
+
+        //TODO:logout
+        navView.menu.findItem(R.id.nav_logout).setOnMenuItemClickListener { MenuItem ->
+            when (MenuItem!!.itemId) {
+                R.id.nav_logout -> {
+                    Log.d("MainActivityTAG", userId)
+                }
+            }
+            true
+        }
+
+        //TODO:show Login Logout menu item based on Firebase Auth_State
+        if (false) {
+            navView.menu.findItem(R.id.nav_login).isVisible = true
+            navView.menu.findItem(R.id.nav_logout).isVisible = false
+        } else {
+            navView.menu.findItem(R.id.nav_login).isVisible = false
+            navView.menu.findItem(R.id.nav_logout).isVisible = true
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

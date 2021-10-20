@@ -32,6 +32,7 @@
     <string name="menu_about">About App</string>
     <string name="menu_rate">Rate Us</string>
     <string name="menu_login">Log In</string>
+    <string name="menu_logout">Log Out</string>
 
     <!--res.layout.fragment_about-->
     <string name="fragment_about_about_text">About</string>

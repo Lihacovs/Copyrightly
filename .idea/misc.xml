@@ -22,6 +22,9 @@
         <entry key="..\:/Users/Konstantins/AndroidStudioProjects/Copyrightly/app/src/main/res/drawable/ic_menu_gallery.xml" value="0.2203125" />
         <entry key="..\:/Users/Konstantins/AndroidStudioProjects/Copyrightly/app/src/main/res/drawable/ic_menu_slideshow.xml" value="0.2203125" />
         <entry key="..\:/Users/Konstantins/AndroidStudioProjects/Copyrightly/app/src/main/res/drawable/ic_send_black_24dp.xml" value="0.17592592592592593" />
+        <entry key="..\:/Users/Konstantins/AndroidStudioProjects/Copyrightly/app/src/main/res/drawable/ic_square_accaunt_24px.xml" value="0.1787109375" />
+        <entry key="..\:/Users/Konstantins/AndroidStudioProjects/Copyrightly/app/src/main/res/drawable/ic_square_facebook_24px.xml" value="0.16944444444444445" />
+        <entry key="..\:/Users/Konstantins/AndroidStudioProjects/Copyrightly/app/src/main/res/drawable/ic_square_google_24px.xml" value="0.6535714285714286" />
         <entry key="..\:/Users/Konstantins/AndroidStudioProjects/Copyrightly/app/src/main/res/drawable/ic_star_white_24px.xml" value="0.2203125" />
         <entry key="..\:/Users/Konstantins/AndroidStudioProjects/Copyrightly/app/src/main/res/drawable/side_nav_bar.xml" value="0.2203125" />
         <entry key="..\:/Users/Konstantins/AndroidStudioProjects/Copyrightly/app/src/main/res/layout/activity_main.xml" value="0.25416666666666665" />
@@ -32,7 +35,7 @@
         <entry key="..\:/Users/Konstantins/AndroidStudioProjects/Copyrightly/app/src/main/res/layout/fragment_gallery.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Konstantins/AndroidStudioProjects/Copyrightly/app/src/main/res/layout/fragment_home.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Konstantins/AndroidStudioProjects/Copyrightly/app/src/main/res/layout/fragment_learn.xml" value="0.20416666666666666" />
-        <entry key="..\:/Users/Konstantins/AndroidStudioProjects/Copyrightly/app/src/main/res/layout/fragment_login.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/Konstantins/AndroidStudioProjects/Copyrightly/app/src/main/res/layout/fragment_login.xml" value="0.25" />
         <entry key="..\:/Users/Konstantins/AndroidStudioProjects/Copyrightly/app/src/main/res/layout/fragment_profile.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/Konstantins/AndroidStudioProjects/Copyrightly/app/src/main/res/layout/fragment_rate.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/Konstantins/AndroidStudioProjects/Copyrightly/app/src/main/res/layout/nav_header_main.xml" value="0.25416666666666665" />

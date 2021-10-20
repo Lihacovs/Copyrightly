@@ -6,6 +6,8 @@
         <package android:name="eu.balticit.copyrightly.utils" />
     </queries>
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher_red"
@@ -13,8 +15,14 @@
         android:roundIcon="@mipmap/ic_launcher_red_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Copyrightly">
+
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_app_id" />
+
         <activity
             android:name=".MainActivity"
+            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/Theme.Copyrightly.NoActionBar">

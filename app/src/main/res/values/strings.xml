@@ -11,6 +11,10 @@
     <string name="app_creator" translatable="false">Created by: Baltic Information Technologies for Copyrightly app</string>
     <string name="app_version" translatable="false">( Version %1$s )</string>
 
+    <!--Facebook login-->
+    <string name="facebook_app_id">[APP_ID]</string>
+    <string name="fb_login_protocol_scheme">fb[APP_ID]</string>
+
     <!--play store-->
     <string name="app_google_play_store_link">"https://play.google.com/store/apps/details?id="</string>
     <string name="app_market_link">"market://details?id="</string>
@@ -65,5 +69,14 @@
         \n\n\tThese Terms are an agreement between you and Copyrightly.
         \n
     </string>
+
+    <!--res.layout.fragment_login-->
+    <string name="fragment_login_app_logo">Copyrightly</string>
+    <string name="fragment_login_email">Email</string>
+    <string name="fragment_login_password">Password</string>
+    <string name="fragment_login_signin">Sign In</string>
+    <string name="fragment_login_google_signin">Sign In with Google</string>
+    <string name="fragment_login_facebook_signin">Sign In with Facebook</string>
+    <string name="fragment_login_register">Don\'t have an Account? Register</string>
 
 </resources>

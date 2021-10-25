@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cl_root_view"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_login_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/YouTube_red_6"
+            android:focusable="true"
+            android:focusableInTouchMode="true">
+
+            <EditText
+                android:id="@+id/et_register_email"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:autofillHints="@string/fragment_register_email"
+                android:backgroundTint="@color/white"
+                android:ems="10"
+                android:hint="@string/fragment_register_email"
+                android:inputType="textEmailAddress"
+                android:singleLine="true"
+                android:textColor="@color/white"
+                android:textColorHint="@color/YouTube_red_4"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <EditText
+                android:id="@+id/et_register_password"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:autofillHints="@string/fragment_register_password"
+                android:backgroundTint="@color/white"
+                android:ems="10"
+                android:hint="@string/fragment_register_password"
+                android:inputType="textVisiblePassword"
+                android:singleLine="true"
+                android:textColor="@color/white"
+                android:textColorHint="@color/YouTube_red_4"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/et_register_email" />
+
+            <ImageView
+                android:id="@+id/iv_register_add_photo"
+                android:layout_width="72dp"
+                android:layout_height="72dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:contentDescription="@string/fragment_register_add_photo"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/et_register_password"
+                app:srcCompat="@drawable/ic_add_photo_24px" />
+
+            <EditText
+                android:id="@+id/et_register_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:autofillHints="@string/fragment_register_name"
+                android:backgroundTint="@color/white"
+                android:ems="10"
+                android:hint="@string/fragment_register_name"
+                android:inputType="textCapWords|textPersonName"
+                android:singleLine="true"
+                android:textColor="@color/white"
+                android:textColorHint="@color/YouTube_red_4"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/iv_register_add_photo"
+                app:layout_constraintTop_toBottomOf="@+id/et_register_password" />
+
+            <EditText
+                android:id="@+id/et_register_surname"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:autofillHints="@string/fragment_register_surname"
+                android:backgroundTint="@color/white"
+                android:ems="10"
+                android:hint="@string/fragment_register_surname"
+                android:inputType="textCapWords|textPersonName"
+                android:singleLine="true"
+                android:textColor="@color/white"
+                android:textColorHint="@color/YouTube_red_4"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/iv_register_add_photo"
+                app:layout_constraintTop_toBottomOf="@+id/et_register_name" />
+
+            <TextView
+                android:id="@+id/tv_register_gender"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:text="@string/fragment_register_gender"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/et_register_surname" />
+
+            <RadioGroup
+                android:id="@+id/rg_register_radio_group"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_register_gender">
+
+                <RadioButton
+                    android:id="@+id/rb_register_male"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/fragment_register_male"
+                    android:textColor="@color/white"
+                    android:buttonTint="@color/white"
+                    tools:layout_editor_absoluteX="16dp"
+                    tools:layout_editor_absoluteY="201dp" />
+
+                <RadioButton
+                    android:id="@+id/rb_register_female"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/fragment_register_female"
+                    android:textColor="@color/white"
+                    android:buttonTint="@color/white"
+                    tools:layout_editor_absoluteY="201dp" />
+
+                <RadioButton
+                    android:id="@+id/rb_register_other"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:checked="true"
+                    android:text="@string/fragment_register_not_specified"
+                    android:textColor="@color/white"
+                    android:buttonTint="@color/white"
+                    tools:layout_editor_absoluteX="273dp"
+                    tools:layout_editor_absoluteY="201dp" />
+            </RadioGroup>
+
+            <TextView
+                android:id="@+id/tv_register_birth_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:text="@string/fragment_register_date_of_birth"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/rg_register_radio_group" />
+
+            <EditText
+                android:id="@+id/et_register_birth_date"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:autofillHints="@string/fragment_register_d_m_y"
+                android:backgroundTint="@color/white"
+                android:clickable="true"
+                android:ems="10"
+                android:focusable="false"
+                android:hint="@string/fragment_register_d_m_y"
+                android:inputType="date"
+                android:longClickable="false"
+                android:textColor="@color/white"
+                android:textColorHint="@color/YouTube_red_4"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_register_birth_date" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_register_group1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/et_register_birth_date">
+
+                <TextView
+                    android:id="@+id/tv_register_terms"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:text="@string/fragment_register_terms"
+                    android:textAlignment="center"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <Button
+                    android:id="@+id/btn_register_register"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="16dp"
+                    android:text="@string/fragment_register_register"
+                    app:drawableLeftCompat="@drawable/ic_circle_login_24px"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_register_terms" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

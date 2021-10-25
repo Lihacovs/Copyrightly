@@ -5,6 +5,8 @@ import eu.balticit.copyrightly.R
 import android.content.ActivityNotFoundException
 import android.content.Context
 import android.net.Uri
+import android.text.TextUtils
+import android.util.Patterns
 import androidx.core.content.ContextCompat.startActivity
 
 object AppUtils {
@@ -45,6 +47,10 @@ object AppUtils {
         if (intent.resolveActivity(context.packageManager) != null) {
             startActivity(context, intent, null)
         }
+    }
+
+    fun isValidEmail(email: String): Boolean {
+        return !TextUtils.isEmpty(email) && Patterns.EMAIL_ADDRESS.matcher(email).matches()
     }
 
 }

@@ -12,7 +12,7 @@ import com.google.firebase.ktx.Firebase
 /**
  * Reads and writes the data from the Firebase database.
  */
-class AppFirebaseHelper internal constructor() : FirebaseHelper {
+class AppFirebaseHelper : FirebaseHelper {
 
     //private final FirebaseFirestore mFirestore;
     private val mAuth: FirebaseAuth

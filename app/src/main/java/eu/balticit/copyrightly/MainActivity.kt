@@ -13,21 +13,26 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import eu.balticit.copyrightly.data.AppRepositoryManager
 import eu.balticit.copyrightly.data.RepositoryManager
 import eu.balticit.copyrightly.data.firebase.AppFirebaseHelper
 import eu.balticit.copyrightly.data.firebase.FirebaseHelper
 import eu.balticit.copyrightly.databinding.ActivityMainBinding
+import eu.balticit.copyrightly.viewmodels.LoginViewModel
 
 class MainActivity : AppCompatActivity() {
 
+    private lateinit var loginViewModel: LoginViewModel
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
-    private var repositoryManager: AppRepositoryManager =
-        AppRepositoryManager(this, AppFirebaseHelper())
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        loginViewModel =
+            ViewModelProvider(this).get(LoginViewModel::class.java)
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -52,26 +57,26 @@ class MainActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
 
-        val userId = repositoryManager.getFirebaseUserId().toString()
-
-        //TODO:logout
-        navView.menu.findItem(R.id.nav_logout).setOnMenuItemClickListener { MenuItem ->
-            when (MenuItem!!.itemId) {
-                R.id.nav_logout -> {
-                    Log.d("MainActivityTAG", userId)
-                }
-            }
-            true
-        }
-
-        //TODO:show Login Logout menu item based on Firebase Auth_State
-        if (false) {
+        if (loginViewModel.user.value == null) {
             navView.menu.findItem(R.id.nav_login).isVisible = true
             navView.menu.findItem(R.id.nav_logout).isVisible = false
         } else {
             navView.menu.findItem(R.id.nav_login).isVisible = false
             navView.menu.findItem(R.id.nav_logout).isVisible = true
         }
+
+        //TODO:logout
+        navView.menu.findItem(R.id.nav_logout).setOnMenuItemClickListener { MenuItem ->
+            when (MenuItem!!.itemId) {
+                R.id.nav_logout -> {
+                    Log.d("MainActivityTAG", loginViewModel.userId.value.toString())
+                    loginViewModel.signOutUser()
+                }
+            }
+            true
+        }
+
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

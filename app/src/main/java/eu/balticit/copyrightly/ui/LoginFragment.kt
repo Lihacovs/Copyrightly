@@ -8,8 +8,10 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
 import com.google.android.material.snackbar.Snackbar
 import eu.balticit.copyrightly.MyApp
+import eu.balticit.copyrightly.R
 import eu.balticit.copyrightly.data.AppRepositoryManager
 import eu.balticit.copyrightly.data.firebase.AppFirebaseHelper
 import eu.balticit.copyrightly.databinding.FragmentLoginBinding
@@ -29,7 +31,7 @@ class LoginFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         loginViewModel =
             ViewModelProvider(this).get(LoginViewModel::class.java)
 
@@ -69,8 +71,7 @@ class LoginFragment : Fragment() {
         }
 
         binding.btnLoginRegister.setOnClickListener { view ->
-            Snackbar.make(view, "Opens register screen", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
+            view.findNavController().navigate(R.id.action_nav_login_to_nav_register)
         }
 
         /*val textView: TextView = binding.textLogin

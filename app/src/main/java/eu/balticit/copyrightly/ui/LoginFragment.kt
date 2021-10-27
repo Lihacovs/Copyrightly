@@ -4,16 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import com.google.android.material.snackbar.Snackbar
-import eu.balticit.copyrightly.MyApp
 import eu.balticit.copyrightly.R
-import eu.balticit.copyrightly.data.AppRepositoryManager
-import eu.balticit.copyrightly.data.firebase.AppFirebaseHelper
 import eu.balticit.copyrightly.databinding.FragmentLoginBinding
 import eu.balticit.copyrightly.utils.AppUtils
 import eu.balticit.copyrightly.viewmodels.LoginViewModel
@@ -42,22 +37,13 @@ class LoginFragment : Fragment() {
         binding.btnLoginServer.setOnClickListener { view ->
             val email: String = binding.etLoginEmail.text.toString()
             val password: String = binding.etLoginPassword.text.toString()
-            if (email.isEmpty()) {
-                Snackbar.make(view, "Empty Email", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show()
-                return@setOnClickListener
+            when {
+                email.isEmpty() -> onError(R.string.login_empty_email, view)
+                !AppUtils.isValidEmail(email) -> onError(R.string.login_invalid_email, view)
+                password.isEmpty() -> onError(R.string.login_empty_password, view)
+                password.length < 6 -> onError(R.string.login_short_password, view)
+                else -> loginViewModel.signInFirebaseUser(email, password)
             }
-            if (!AppUtils.isValidEmail(email)) {
-                Snackbar.make(view, "Invalid Email", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show()
-                return@setOnClickListener
-            }
-            if (password.isEmpty()) {
-                Snackbar.make(view, "Empty Password", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show()
-                return@setOnClickListener
-            }
-            loginViewModel.signInFirebaseUser(email, password)
         }
 
         binding.btnLoginGoogle.setOnClickListener { view ->
@@ -84,5 +70,10 @@ class LoginFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private fun onError(resId: Int, view: View) {
+        Snackbar.make(view, getString(resId), Snackbar.LENGTH_LONG)
+            .setAction("Action", null).show()
     }
 }

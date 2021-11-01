@@ -30,13 +30,13 @@ interface FirebaseHelper {
 
     fun getFirebaseUserEmail(): String?
 
-    fun getFirebaseUserImageUrl(): String?
+    fun getFirebaseUserImageUrl(): String
 
-    fun setFirebaseUserName(userName: String?)
+    fun setFirebaseUserName(userName: String): Task<Void>?
 
-    fun setFirebaseUserEmail(userEmail: String?)
+    fun setFirebaseUserEmail(userEmail: String): Task<Void>?
 
-    fun setFirebaseUserImageUrl(userImageUrl: String?)
+    fun setFirebaseUserImageUrl(userImageUrl: String): Task<Void>?
 
-    fun setFirebaseUserProfile(userName: String?, userPhotoUrl: String?): Task<Void?>?
+    fun setFirebaseUserProfile(userName: String, userPhotoUrl: String): Task<Void>?
 }

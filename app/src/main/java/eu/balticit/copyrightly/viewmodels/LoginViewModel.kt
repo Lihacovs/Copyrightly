@@ -7,13 +7,17 @@ import com.google.android.gms.tasks.OnFailureListener
 import com.google.android.gms.tasks.OnSuccessListener
 import eu.balticit.copyrightly.MyApp
 import eu.balticit.copyrightly.data.AppRepositoryManager
-import android.util.Log
 import com.google.firebase.auth.*
+import eu.balticit.copyrightly.R
 
 
 class LoginViewModel : ViewModel() {
 
     private val repositoryManager: AppRepositoryManager = MyApp.repositoryManager
+
+
+    private val _errorMessage = MutableLiveData<Int>()
+    val errorMessage: LiveData<Int> = _errorMessage
 
     private val _text = MutableLiveData<String>().apply {
         value = "This is Login Fragment"
@@ -41,23 +45,20 @@ class LoginViewModel : ViewModel() {
             }
         ).addOnFailureListener(
             OnFailureListener {
-                if (it is FirebaseAuthInvalidUserException ){
-                    if (it.errorCode == "ERROR_USER_NOT_FOUND") {
-                        Log.d("LoginViewModelTAG", "User Not Found")
-                        return@OnFailureListener
+                when (it) {
+                    is FirebaseAuthInvalidUserException -> {
+                        if (it.errorCode == "ERROR_USER_NOT_FOUND") {
+                            _errorMessage.postValue(R.string.login_email_not_exist)
+                        } else {
+                            _errorMessage.postValue(R.string.login_some_error)
+                        }
                     }
-                    Log.d("LoginViewModelTAG", it.message.toString())
-                    return@OnFailureListener
+                    is FirebaseAuthInvalidCredentialsException ->
+                        _errorMessage.postValue(R.string.login_invalid_password)
+                    is FirebaseAuthUserCollisionException ->
+                        _errorMessage.postValue(R.string.login_email_already_used)
+                    else -> _errorMessage.postValue(R.string.login_some_error)
                 }
-                if (it is FirebaseAuthInvalidCredentialsException){
-                    Log.d("LoginViewModelTAG", "Invalid Password")
-                    return@OnFailureListener
-                }
-                if (it is FirebaseAuthUserCollisionException){
-                    Log.d("LoginViewModelTAG", "Email is already used")
-                    return@OnFailureListener
-                }
-                Log.d("LoginViewModelTAG", it.message.toString())
             })
     }
 }

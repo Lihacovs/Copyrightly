@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -31,10 +32,21 @@ class HomeFragment : Fragment() {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.textHome
-        homeViewModel.text.observe(viewLifecycleOwner, Observer {
-            textView.text = it
+        val userName: TextView = binding.textHome
+        homeViewModel.mUserName.observe(viewLifecycleOwner, Observer {
+            userName.text = it
         })
+
+        val userId: TextView = binding.textView2
+        homeViewModel.userId.observe(viewLifecycleOwner, Observer {
+            userId.text = it
+        })
+
+        val nameEt: EditText = binding.homeEt
+        binding.homeButton.setOnClickListener {
+            homeViewModel.setFirebaseUserName(nameEt.text.toString())
+        }
+
         return root
     }
 

@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import com.google.android.material.snackbar.Snackbar
@@ -45,6 +46,10 @@ class LoginFragment : Fragment() {
                 else -> loginViewModel.signInFirebaseUser(email, password)
             }
         }
+
+        loginViewModel.errorMessage.observe(viewLifecycleOwner, Observer {
+            onError(it, root)
+        })
 
         binding.btnLoginGoogle.setOnClickListener { view ->
             Snackbar.make(view, "Login through Google", Snackbar.LENGTH_LONG)

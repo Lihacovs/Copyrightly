@@ -1,13 +1,30 @@
 package eu.balticit.copyrightly.viewmodels
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import eu.balticit.copyrightly.MyApp
+import eu.balticit.copyrightly.data.AppRepositoryManager
 
 class HomeViewModel : ViewModel() {
 
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is home Fragment"
+    private val repositoryManager: AppRepositoryManager = MyApp.repositoryManager
+
+    private val _currentUserName = MutableLiveData<String?>().apply {
+        value = repositoryManager.getFirebaseUserName()
     }
-    val text: LiveData<String> = _text
+    val mUserName: LiveData<String?> = _currentUserName
+
+    private val _userId = MutableLiveData<String?>().apply {
+        value = repositoryManager.getFirebaseUserId()
+    }
+    val userId: LiveData<String?> = _userId
+
+    fun setFirebaseUserName(userName: String?){
+        repositoryManager.setFirebaseUserName(userName)?.addOnSuccessListener {
+            _currentUserName.postValue(userName)
+        }
+    }
+
 }

@@ -1,11 +1,9 @@
 package eu.balticit.copyrightly.data
 
-import android.content.Context
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.AuthCredential
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseUser
-import eu.balticit.copyrightly.MyApp
 import eu.balticit.copyrightly.data.firebase.AppFirebaseHelper
 import eu.balticit.copyrightly.data.firebase.FirebaseHelper
 
@@ -47,33 +45,31 @@ class AppRepositoryManager : RepositoryManager {
     }
 
     override fun getFirebaseUserName(): String? {
-        TODO("Not yet implemented")
+        return mFirebaseHelper.getFirebaseUserName()
     }
 
     override fun getFirebaseUserEmail(): String? {
-        TODO("Not yet implemented")
+        return mFirebaseHelper.getFirebaseUserEmail()
     }
 
-    override fun getFirebaseUserImageUrl(): String? {
-        TODO("Not yet implemented")
+    override fun getFirebaseUserImageUrl(): String {
+        return mFirebaseHelper.getFirebaseUserImageUrl()
     }
 
-    override fun setFirebaseUserName(userName: String?) {
-        TODO("Not yet implemented")
+    override fun setFirebaseUserName(userName: String): Task<Void>? {
+        return mFirebaseHelper.setFirebaseUserName(userName)
     }
 
-    override fun setFirebaseUserEmail(userEmail: String?) {
-        TODO("Not yet implemented")
+    override fun setFirebaseUserEmail(userEmail: String): Task<Void>? {
+        return mFirebaseHelper.setFirebaseUserEmail(userEmail)
     }
 
-    override fun setFirebaseUserImageUrl(userImageUrl: String?) {
-        TODO("Not yet implemented")
+    override fun setFirebaseUserImageUrl(userImageUrl: String): Task<Void>? {
+        return mFirebaseHelper.setFirebaseUserImageUrl(userImageUrl)
     }
 
-    override fun setFirebaseUserProfile(userName: String?, userPhotoUrl: String?): Task<Void?>? {
-        TODO("Not yet implemented")
+    override fun setFirebaseUserProfile(userName: String, userPhotoUrl: String): Task<Void>? {
+        return setFirebaseUserProfile(userName, userPhotoUrl)
     }
     //private val mNetworkHelper: NetworkHelper? = null
-
-
 }

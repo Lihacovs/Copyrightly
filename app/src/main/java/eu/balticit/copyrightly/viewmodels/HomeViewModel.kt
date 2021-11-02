@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.google.firebase.auth.FirebaseUser
 import eu.balticit.copyrightly.MyApp
 import eu.balticit.copyrightly.data.AppRepositoryManager
 
@@ -20,11 +21,5 @@ class HomeViewModel : ViewModel() {
         value = repositoryManager.getFirebaseUserId()
     }
     val userId: LiveData<String?> = _userId
-
-    fun setFirebaseUserName(userName: String?){
-        repositoryManager.setFirebaseUserName(userName)?.addOnSuccessListener {
-            _currentUserName.postValue(userName)
-        }
-    }
 
 }

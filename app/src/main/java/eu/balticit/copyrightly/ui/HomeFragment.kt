@@ -11,10 +11,12 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import eu.balticit.copyrightly.databinding.FragmentHomeBinding
 import eu.balticit.copyrightly.viewmodels.HomeViewModel
+import eu.balticit.copyrightly.viewmodels.LoginViewModel
 
 class HomeFragment : Fragment() {
 
     private lateinit var homeViewModel: HomeViewModel
+    private lateinit var loginViewModel: LoginViewModel
     private var _binding: FragmentHomeBinding? = null
 
     // This property is only valid between onCreateView and
@@ -28,23 +30,26 @@ class HomeFragment : Fragment() {
     ): View? {
         homeViewModel =
             ViewModelProvider(this).get(HomeViewModel::class.java)
+        loginViewModel =
+            ViewModelProvider(this).get(LoginViewModel::class.java)
 
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
+
         val userName: TextView = binding.textHome
-        homeViewModel.mUserName.observe(viewLifecycleOwner, Observer {
-            userName.text = it
+        loginViewModel.user.observe(viewLifecycleOwner, Observer {
+            userName.text = it?.displayName.toString()
         })
 
         val userId: TextView = binding.textView2
-        homeViewModel.userId.observe(viewLifecycleOwner, Observer {
-            userId.text = it
+        loginViewModel.user.observe(viewLifecycleOwner, Observer {
+            userId.text = it?.uid.toString()
         })
 
         val nameEt: EditText = binding.homeEt
         binding.homeButton.setOnClickListener {
-            homeViewModel.setFirebaseUserName(nameEt.text.toString())
+            loginViewModel.setFirebaseUserName(nameEt.text.toString())
         }
 
         return root

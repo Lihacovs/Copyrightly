@@ -35,7 +35,6 @@
     <string name="login_some_error">Some error has occurred. Try again</string>
     <string name="login_short_password">Please enter at lest 6 characters Password</string>
 
-
     <!--ui.Register-->
     <string name="register_empty_email">Please enter your Email</string>
     <string name="register_invalid_email">Please enter a valid Email</string>
@@ -51,6 +50,13 @@
     <string name="register_email_already_used">Email address is already used</string>
     <string name="register_try_again">Please try again</string>
     <string name="register_some_error">Some error occurred. Try again</string>
+
+
+    <!--res.layout.drawer_header-->
+    <string name="drawer_header_bg_image">Background image</string>
+    <string name="drawer_header_user_photo">User photo</string>
+    <string name="drawer_header_user_name">Copyrightly</string>
+    <string name="drawer_header_user_email">Protecting your copyrights</string>
 
     <!--res.menu.activity_main_drawer-->
     <string name="menu_home">Home</string>

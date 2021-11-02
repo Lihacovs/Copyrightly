@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
+import android.widget.TextView
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.navigation.NavigationView
 import androidx.navigation.findNavController
@@ -39,6 +41,8 @@ class MainActivity : AppCompatActivity() {
 
         setSupportActionBar(binding.appBarMain.toolbar)
 
+
+
         binding.appBarMain.fab.setOnClickListener { view ->
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show()
@@ -57,19 +61,39 @@ class MainActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
 
-        if (loginViewModel.user.value == null) {
+        val headerLayout: View = navView.getHeaderView(0)
+
+        loginViewModel.user.observe(this, Observer {
+            Log.d("LoginViewModelTAG", "Observer triggered: " + it?.displayName.toString())
+            if (it != null) {
+                navView.menu.findItem(R.id.nav_login).isVisible = false
+                navView.menu.findItem(R.id.nav_logout).isVisible = true
+                navController.navigate(R.id.nav_home)
+                headerLayout.findViewById<TextView>(R.id.tv_drawer_header_user_name).text =
+                    it.displayName.toString()
+                headerLayout.findViewById<TextView>(R.id.tv_drawer_header_user_email).text =
+                    it.email.toString()
+
+            } else {
+                navView.menu.findItem(R.id.nav_login).isVisible = true
+                navView.menu.findItem(R.id.nav_logout).isVisible = false
+                navController.navigate(R.id.nav_login)
+            }
+        })
+
+        /*if (loginViewModel.user.value == null) {
             navView.menu.findItem(R.id.nav_login).isVisible = true
             navView.menu.findItem(R.id.nav_logout).isVisible = false
         } else {
             navView.menu.findItem(R.id.nav_login).isVisible = false
             navView.menu.findItem(R.id.nav_logout).isVisible = true
-        }
+        }*/
 
         //TODO:logout
         navView.menu.findItem(R.id.nav_logout).setOnMenuItemClickListener { MenuItem ->
             when (MenuItem!!.itemId) {
                 R.id.nav_logout -> {
-                    Log.d("MainActivityTAG", loginViewModel.userId.value.toString())
+                    //Log.d("MainActivityTAG", loginViewModel.userId.value.toString())
                     loginViewModel.signOutUser()
                 }
             }

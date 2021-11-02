@@ -1,8 +1,10 @@
 package eu.balticit.copyrightly.viewmodels
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.gms.tasks.OnFailureListener
 import com.google.android.gms.tasks.OnSuccessListener
 import eu.balticit.copyrightly.MyApp
@@ -29,18 +31,25 @@ class LoginViewModel : ViewModel() {
     }
     val user: LiveData<FirebaseUser?> = _user
 
-    private val _userId = MutableLiveData<String>().apply {
-        value = repositoryManager.getFirebaseUserId()
-    }
-    val userId: LiveData<String> = _userId
-
     fun signOutUser() {
         repositoryManager.signOutFirebaseUser()
+        _user.value = repositoryManager.getFirebaseUser()
+    }
+
+    fun setFirebaseUserName(userName: String){
+        repositoryManager.setFirebaseUserName(userName)?.addOnSuccessListener {
+            _user.postValue(repositoryManager.getFirebaseUser())
+        }
     }
 
     fun signInFirebaseUser(email: String, password: String) {
         repositoryManager.signInFirebaseUser(email, password).addOnSuccessListener(
             OnSuccessListener {
+                //TODO: observer is not triggered from there
+                Log.d("LoginViewModelTAG", it.user?.displayName.toString())
+                _user.value = repositoryManager.getFirebaseUser()
+                Log.d("LoginViewModelTAG", _user.value.toString())
+                Log.d("LoginViewModelTAG", user.value.toString())
 
             }
         ).addOnFailureListener(
@@ -48,16 +57,16 @@ class LoginViewModel : ViewModel() {
                 when (it) {
                     is FirebaseAuthInvalidUserException -> {
                         if (it.errorCode == "ERROR_USER_NOT_FOUND") {
-                            _errorMessage.postValue(R.string.login_email_not_exist)
+                            _errorMessage.value = R.string.login_email_not_exist
                         } else {
-                            _errorMessage.postValue(R.string.login_some_error)
+                            _errorMessage.value = R.string.login_some_error
                         }
                     }
                     is FirebaseAuthInvalidCredentialsException ->
-                        _errorMessage.postValue(R.string.login_invalid_password)
+                        _errorMessage.value = R.string.login_invalid_password
                     is FirebaseAuthUserCollisionException ->
-                        _errorMessage.postValue(R.string.login_email_already_used)
-                    else -> _errorMessage.postValue(R.string.login_some_error)
+                        _errorMessage.value = R.string.login_email_already_used
+                    else -> _errorMessage.value = R.string.login_some_error
                 }
             })
     }

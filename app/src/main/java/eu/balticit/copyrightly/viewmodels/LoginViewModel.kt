@@ -36,20 +36,20 @@ class LoginViewModel : ViewModel() {
         _user.value = repositoryManager.getFirebaseUser()
     }
 
-    fun setFirebaseUserName(userName: String){
+    fun setFirebaseUserName(userName: String) {
         repositoryManager.setFirebaseUserName(userName)?.addOnSuccessListener {
-            _user.postValue(repositoryManager.getFirebaseUser())
+            _user.value = repositoryManager.getFirebaseUser()
         }
     }
 
     fun signInFirebaseUser(email: String, password: String) {
         repositoryManager.signInFirebaseUser(email, password).addOnSuccessListener(
             OnSuccessListener {
-                //TODO: observer is not triggered from there
-                Log.d("LoginViewModelTAG", it.user?.displayName.toString())
+                //TODO: observer is not triggered from there, use same viewModel class for both activity and fragment
+                Log.d("LoginViewModelTAG", "1 " + it.user?.displayName.toString())
                 _user.value = repositoryManager.getFirebaseUser()
-                Log.d("LoginViewModelTAG", _user.value.toString())
-                Log.d("LoginViewModelTAG", user.value.toString())
+                Log.d("LoginViewModelTAG", "2: " + _user.value?.displayName.toString())
+                Log.d("LoginViewModelTAG", "3: " + user.value?.displayName.toString())
 
             }
         ).addOnFailureListener(

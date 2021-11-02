@@ -3,45 +3,37 @@ package eu.balticit.copyrightly
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
-import android.view.MenuItem
 import android.view.View
 import android.widget.TextView
-import com.google.android.material.snackbar.Snackbar
-import com.google.android.material.navigation.NavigationView
+import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.GravityCompat
+import androidx.drawerlayout.widget.DrawerLayout
+import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
-import androidx.drawerlayout.widget.DrawerLayout
-import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
-import eu.balticit.copyrightly.data.AppRepositoryManager
-import eu.balticit.copyrightly.data.RepositoryManager
-import eu.balticit.copyrightly.data.firebase.AppFirebaseHelper
-import eu.balticit.copyrightly.data.firebase.FirebaseHelper
+import com.google.android.material.navigation.NavigationView
+import com.google.android.material.snackbar.Snackbar
 import eu.balticit.copyrightly.databinding.ActivityMainBinding
 import eu.balticit.copyrightly.viewmodels.LoginViewModel
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var loginViewModel: LoginViewModel
+    private val loginViewModel: LoginViewModel by viewModels()
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        loginViewModel =
-            ViewModelProvider(this).get(LoginViewModel::class.java)
+        Log.d("LoginViewModelTAG", "On Create triggered")
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         setSupportActionBar(binding.appBarMain.toolbar)
-
-
 
         binding.appBarMain.fab.setOnClickListener { view ->
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
@@ -68,16 +60,20 @@ class MainActivity : AppCompatActivity() {
             if (it != null) {
                 navView.menu.findItem(R.id.nav_login).isVisible = false
                 navView.menu.findItem(R.id.nav_logout).isVisible = true
-                navController.navigate(R.id.nav_home)
                 headerLayout.findViewById<TextView>(R.id.tv_drawer_header_user_name).text =
                     it.displayName.toString()
                 headerLayout.findViewById<TextView>(R.id.tv_drawer_header_user_email).text =
                     it.email.toString()
+                navController.navigate(R.id.nav_home)
 
             } else {
                 navView.menu.findItem(R.id.nav_login).isVisible = true
                 navView.menu.findItem(R.id.nav_logout).isVisible = false
                 navController.navigate(R.id.nav_login)
+                headerLayout.findViewById<TextView>(R.id.tv_drawer_header_user_name).text =
+                    getString(R.string.drawer_header_user_name)
+                headerLayout.findViewById<TextView>(R.id.tv_drawer_header_user_email).text =
+                    getString(R.string.drawer_header_user_email)
             }
         })
 
@@ -95,6 +91,7 @@ class MainActivity : AppCompatActivity() {
                 R.id.nav_logout -> {
                     //Log.d("MainActivityTAG", loginViewModel.userId.value.toString())
                     loginViewModel.signOutUser()
+                    drawerLayout.closeDrawer(GravityCompat.START)
                 }
             }
             true

@@ -5,17 +5,21 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import com.google.android.material.snackbar.Snackbar
 import eu.balticit.copyrightly.R
+import eu.balticit.copyrightly.base.BaseFragment
 import eu.balticit.copyrightly.databinding.FragmentRegisterBinding
 import eu.balticit.copyrightly.utils.AppUtils
+import eu.balticit.copyrightly.viewmodels.LoginViewModel
 import eu.balticit.copyrightly.viewmodels.RegisterViewModel
 
-class RegisterFragment : Fragment() {
+class RegisterFragment : BaseFragment() {
 
-    private lateinit var registerViewModel: RegisterViewModel
+    private val loginViewModel: LoginViewModel by activityViewModels()
     private var _binding: FragmentRegisterBinding? = null
 
     // This property is only valid between onCreateView and
@@ -27,9 +31,6 @@ class RegisterFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        registerViewModel =
-            ViewModelProvider(this).get(RegisterViewModel::class.java)
-
         _binding = FragmentRegisterBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
@@ -38,35 +39,50 @@ class RegisterFragment : Fragment() {
         }
 
         binding.btnRegisterRegister.setOnClickListener { view ->
+            hideKeyboard()
             val userEmail: String = binding.etRegisterEmail.text.toString()
             val userPassword: String = binding.etRegisterPassword.text.toString()
             val userName: String = binding.etRegisterName.text.toString()
             val userSurname: String = binding.etRegisterSurname.text.toString()
             //Validates register data
             when {
-                userEmail.isEmpty() -> onError(R.string.register_empty_email, view)
-                !AppUtils.isValidEmail(userEmail) -> onError(R.string.register_invalid_email, view)
-                userPassword.isEmpty() -> onError(R.string.register_empty_password, view)
-                userPassword.length < 6 -> onError(R.string.register_short_password, view)
-                userName.isEmpty() -> onError(R.string.register_empty_name, view)
-                userName.length < 2 -> onError(R.string.register_short_name, view)
-                userSurname.isEmpty() -> onError(R.string.register_empty_surname, view)
-                userName.length < 2 -> onError(R.string.register_short_name, view)
-                else -> registerViewModel.createFirebaseUser(userEmail,userPassword)
-
+                userEmail.isEmpty() -> showSnackbar(R.string.register_empty_email, view)
+                !AppUtils.isValidEmail(userEmail) -> showSnackbar(
+                    R.string.register_invalid_email,
+                    view
+                )
+                userPassword.isEmpty() -> showSnackbar(R.string.register_empty_password, view)
+                userPassword.length < 6 -> showSnackbar(R.string.register_short_password, view)
+                userName.isEmpty() -> showSnackbar(R.string.register_empty_name, view)
+                userName.length < 2 -> showSnackbar(R.string.register_short_name, view)
+                userSurname.isEmpty() -> showSnackbar(R.string.register_empty_surname, view)
+                userName.length < 2 -> showSnackbar(R.string.register_short_name, view)
+                else -> {
+                    showLoading()
+                    loginViewModel.createFirebaseUser(
+                        userEmail,
+                        userPassword,
+                        userName,
+                        userSurname
+                    )
+                }
             }
         }
+
+        loginViewModel.user.observe(viewLifecycleOwner, {
+            hideLoading()
+        })
+
+        loginViewModel.errorMessage.observe(viewLifecycleOwner, Observer {
+            hideLoading()
+            showSnackbar(it, root)
+        })
+
         return root
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
-    }
-
-
-    private fun onError(resId: Int, view: View) {
-        Snackbar.make(view, getString(resId), Snackbar.LENGTH_LONG)
-            .setAction("Action", null).show()
     }
 }

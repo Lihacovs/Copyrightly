@@ -9,11 +9,12 @@ import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.snackbar.Snackbar
 import eu.balticit.copyrightly.BuildConfig
 import eu.balticit.copyrightly.R
+import eu.balticit.copyrightly.base.BaseFragment
 import eu.balticit.copyrightly.databinding.FragmentAboutBinding
 import eu.balticit.copyrightly.utils.AppUtils
 import eu.balticit.copyrightly.viewmodels.AboutViewModel
 
-class AboutFragment : Fragment() {
+class AboutFragment : BaseFragment() {
 
     private lateinit var aboutViewModel: AboutViewModel
     private var _binding: FragmentAboutBinding? = null

@@ -68,7 +68,7 @@ class AppRepositoryManager : RepositoryManager {
         return mFirebaseHelper.setFirebaseUserImageUrl(userImageUrl)
     }
 
-    override fun setFirebaseUserProfile(userName: String, userPhotoUrl: String): Task<Void>? {
+    override fun setFirebaseUserProfile(userName: String, userPhotoUrl: String?): Task<Void>? {
         return setFirebaseUserProfile(userName, userPhotoUrl)
     }
     //private val mNetworkHelper: NetworkHelper? = null

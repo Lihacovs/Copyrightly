@@ -13,11 +13,12 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import com.google.android.material.snackbar.Snackbar
 import eu.balticit.copyrightly.R
+import eu.balticit.copyrightly.base.BaseFragment
 import eu.balticit.copyrightly.databinding.FragmentLoginBinding
 import eu.balticit.copyrightly.utils.AppUtils
 import eu.balticit.copyrightly.viewmodels.LoginViewModel
 
-class LoginFragment : Fragment() {
+class LoginFragment : BaseFragment() {
 
     private val loginViewModel: LoginViewModel by activityViewModels()
     private var _binding: FragmentLoginBinding? = null
@@ -37,19 +38,28 @@ class LoginFragment : Fragment() {
 
 
         binding.btnLoginServer.setOnClickListener { view ->
+            hideKeyboard()
             val email: String = binding.etLoginEmail.text.toString()
             val password: String = binding.etLoginPassword.text.toString()
             when {
-                email.isEmpty() -> onError(R.string.login_empty_email, view)
-                !AppUtils.isValidEmail(email) -> onError(R.string.login_invalid_email, view)
-                password.isEmpty() -> onError(R.string.login_empty_password, view)
-                password.length < 6 -> onError(R.string.login_short_password, view)
-                else -> loginViewModel.signInFirebaseUser(email, password)
+                email.isEmpty() -> showSnackbar(R.string.login_empty_email, view)
+                !AppUtils.isValidEmail(email) -> showSnackbar(R.string.login_invalid_email, view)
+                password.isEmpty() -> showSnackbar(R.string.login_empty_password, view)
+                password.length < 6 -> showSnackbar(R.string.login_short_password, view)
+                else ->{
+                    showLoading()
+                    loginViewModel.signInFirebaseUser(email, password)
+                }
             }
         }
 
+        loginViewModel.user.observe(viewLifecycleOwner, Observer {
+            hideLoading()
+        })
+
         loginViewModel.errorMessage.observe(viewLifecycleOwner, Observer {
-            onError(it, root)
+            hideLoading()
+            showSnackbar(it, root)
         })
 
         binding.btnLoginGoogle.setOnClickListener { view ->
@@ -76,10 +86,5 @@ class LoginFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
-    }
-
-    private fun onError(resId: Int, view: View) {
-        Snackbar.make(view, getString(resId), Snackbar.LENGTH_LONG)
-            .setAction("Action", null).show()
     }
 }

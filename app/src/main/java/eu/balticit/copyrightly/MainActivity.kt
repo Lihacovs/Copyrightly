@@ -17,10 +17,11 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.snackbar.Snackbar
+import eu.balticit.copyrightly.base.BaseActivity
 import eu.balticit.copyrightly.databinding.ActivityMainBinding
 import eu.balticit.copyrightly.viewmodels.LoginViewModel
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity() {
 
     private val loginViewModel: LoginViewModel by viewModels()
     private lateinit var appBarConfiguration: AppBarConfiguration
@@ -69,11 +70,11 @@ class MainActivity : AppCompatActivity() {
             } else {
                 navView.menu.findItem(R.id.nav_login).isVisible = true
                 navView.menu.findItem(R.id.nav_logout).isVisible = false
-                navController.navigate(R.id.nav_login)
                 headerLayout.findViewById<TextView>(R.id.tv_drawer_header_user_name).text =
                     getString(R.string.drawer_header_user_name)
                 headerLayout.findViewById<TextView>(R.id.tv_drawer_header_user_email).text =
                     getString(R.string.drawer_header_user_email)
+                navController.navigate(R.id.nav_login)
             }
         })
 

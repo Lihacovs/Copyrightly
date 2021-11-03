@@ -77,7 +77,7 @@ class AppFirebaseHelper : FirebaseHelper {
         return mAuth.currentUser?.updateProfile(profileUpdates)
     }
 
-    override fun setFirebaseUserProfile(userName: String, userPhotoUrl: String): Task<Void>? {
+    override fun setFirebaseUserProfile(userName: String, userPhotoUrl: String?): Task<Void>? {
         val profileUpdates = userProfileChangeRequest {
             displayName = userName
             photoUri = Uri.parse(userPhotoUrl)

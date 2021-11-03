@@ -38,5 +38,5 @@ interface FirebaseHelper {
 
     fun setFirebaseUserImageUrl(userImageUrl: String): Task<Void>?
 
-    fun setFirebaseUserProfile(userName: String, userPhotoUrl: String): Task<Void>?
+    fun setFirebaseUserProfile(userName: String, userPhotoUrl: String?): Task<Void>?
 }

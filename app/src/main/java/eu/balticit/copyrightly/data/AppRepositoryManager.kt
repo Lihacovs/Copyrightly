@@ -1,17 +1,10 @@
 package eu.balticit.copyrightly.data
 
-import android.app.Activity
-import android.content.Context
-import android.content.Intent
-import com.google.android.gms.auth.api.signin.GoogleSignIn
-import com.google.android.gms.auth.api.signin.GoogleSignInClient
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.AuthCredential
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.DocumentSnapshot
-import eu.balticit.copyrightly.R
 import eu.balticit.copyrightly.data.firebase.AppFirebaseHelper
 import eu.balticit.copyrightly.data.firebase.FirebaseHelper
 import eu.balticit.copyrightly.data.firebase.model.User
@@ -81,16 +74,16 @@ class AppRepositoryManager() : RepositoryManager {
         return setFirebaseUserProfile(userName, userPhotoUrl)
     }
 
-    override fun saveUser(user: User): Task<Void> {
-        return mFirebaseHelper.saveUser(user)
+    override fun saveFirestoreUser(user: User): Task<Void> {
+        return mFirebaseHelper.saveFirestoreUser(user)
     }
 
-    override fun updateUser(user: User): Task<Void> {
-        return mFirebaseHelper.updateUser(user)
+    override fun updateFirestoreUser(user: User): Task<Void> {
+        return mFirebaseHelper.updateFirestoreUser(user)
     }
 
-    override fun getUser(userId: String): Task<DocumentSnapshot> {
-        return mFirebaseHelper.getUser(userId)
+    override fun getFirestoreUser(userId: String): Task<DocumentSnapshot> {
+        return mFirebaseHelper.getFirestoreUser(userId)
     }
     //private val mNetworkHelper: NetworkHelper? = null
 }

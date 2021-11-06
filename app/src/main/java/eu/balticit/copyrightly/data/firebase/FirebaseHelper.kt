@@ -44,9 +44,9 @@ interface FirebaseHelper {
 
     //=//=// F I R E B A S E  -  F I R E S T O R E //=//=//
 
-    fun saveUser(user: User): Task<Void>
+    fun saveFirestoreUser(user: User): Task<Void>
 
-    fun updateUser(user: User): Task<Void>
+    fun updateFirestoreUser(user: User): Task<Void>
 
-    fun getUser(userId: String): Task<DocumentSnapshot>
+    fun getFirestoreUser(userId: String): Task<DocumentSnapshot>
 }

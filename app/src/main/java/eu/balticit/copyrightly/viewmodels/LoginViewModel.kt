@@ -1,7 +1,6 @@
 package eu.balticit.copyrightly.viewmodels
 
 import android.app.Activity
-import android.content.Intent
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -94,7 +93,7 @@ class LoginViewModel : ViewModel() {
                 repositoryManager.setFirebaseUserName("$name $surname")?.addOnSuccessListener {
 
                     //Saves User in the Firestore Database
-                    repositoryManager.saveUser(user).addOnSuccessListener {
+                    repositoryManager.saveFirestoreUser(user).addOnSuccessListener {
                         Log.w(TAG, "User saved in Firestore: ")
                         _user.value = repositoryManager.getFirebaseUser()
                     }.addOnFailureListener {
@@ -137,7 +136,7 @@ class LoginViewModel : ViewModel() {
             )
 
             //Saves User in the Firestore Database
-            repositoryManager.saveUser(user).addOnSuccessListener {
+            repositoryManager.saveFirestoreUser(user).addOnSuccessListener {
                 Log.w(TAG, "User saved in Firestore: ")
                 _user.value = repositoryManager.getFirebaseUser()
             }.addOnFailureListener {

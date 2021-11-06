@@ -94,19 +94,19 @@ class AppFirebaseHelper : FirebaseHelper {
 
     //=//=// F I R E B A S E  -  F I R E S T O R E //=//=//
 
-    override fun saveUser(user: User): Task<Void> {
+    override fun saveFirestoreUser(user: User): Task<Void> {
         return mFirestore.collection(AppConstants.USERS_COLLECTION)
             .document(user.userId)
             .set(user)
     }
 
-    override fun updateUser(user: User): Task<Void> {
+    override fun updateFirestoreUser(user: User): Task<Void> {
         return mFirestore.collection(AppConstants.USERS_COLLECTION)
             .document(user.userId)
             .set(user, SetOptions.merge())
     }
 
-    override fun getUser(userId: String): Task<DocumentSnapshot> {
+    override fun getFirestoreUser(userId: String): Task<DocumentSnapshot> {
         val docRef: DocumentReference =
             mFirestore.collection(AppConstants.USERS_COLLECTION).document(userId)
         return docRef.get()

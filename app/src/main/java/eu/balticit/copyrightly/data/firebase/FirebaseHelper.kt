@@ -4,6 +4,8 @@ import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.AuthCredential
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.firestore.DocumentSnapshot
+import eu.balticit.copyrightly.data.firebase.model.User
 
 
 /**
@@ -39,4 +41,12 @@ interface FirebaseHelper {
     fun setFirebaseUserImageUrl(userImageUrl: String): Task<Void>?
 
     fun setFirebaseUserProfile(userName: String, userPhotoUrl: String?): Task<Void>?
+
+    //=//=// F I R E B A S E  -  F I R E S T O R E //=//=//
+
+    fun saveUser(user: User): Task<Void>
+
+    fun updateUser(user: User): Task<Void>
+
+    fun getUser(userId: String): Task<DocumentSnapshot>
 }

@@ -16,10 +16,19 @@ import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat.startActivity
 import eu.balticit.copyrightly.R
+import java.text.SimpleDateFormat
+import java.util.*
 
 object AppUtils {
 
-    fun setProgressDialog(context:Context, message:String): AlertDialog {
+    fun getCurrentDate(): String {
+        return SimpleDateFormat(
+            AppConstants.TIMESTAMP_FORMAT,
+            Locale.US
+        ).format(Calendar.getInstance().time)
+    }
+
+    fun setProgressDialog(context: Context, message: String): AlertDialog {
         val llPadding = 30
         val ll = LinearLayout(context)
         ll.orientation = LinearLayout.HORIZONTAL
@@ -27,7 +36,8 @@ object AppUtils {
         ll.gravity = Gravity.CENTER
         var llParam = LinearLayout.LayoutParams(
             LinearLayout.LayoutParams.WRAP_CONTENT,
-            LinearLayout.LayoutParams.WRAP_CONTENT)
+            LinearLayout.LayoutParams.WRAP_CONTENT
+        )
         llParam.gravity = Gravity.CENTER
         ll.layoutParams = llParam
 
@@ -38,7 +48,8 @@ object AppUtils {
 
         llParam = LinearLayout.LayoutParams(
             ViewGroup.LayoutParams.WRAP_CONTENT,
-            ViewGroup.LayoutParams.WRAP_CONTENT)
+            ViewGroup.LayoutParams.WRAP_CONTENT
+        )
         llParam.gravity = Gravity.CENTER
         val tvText = TextView(context)
         tvText.text = message

@@ -13,6 +13,8 @@ import com.google.firebase.auth.*
 import eu.balticit.copyrightly.MyApp
 import eu.balticit.copyrightly.R
 import eu.balticit.copyrightly.data.AppRepositoryManager
+import eu.balticit.copyrightly.data.firebase.model.User
+import eu.balticit.copyrightly.utils.AppUtils
 
 
 /**
@@ -71,10 +73,35 @@ class LoginViewModel : ViewModel() {
     }
 
     fun createFirebaseUser(email: String, password: String, name: String, surname: String) {
+        //Creates Firebase User
         repositoryManager.createFirebaseUser(email, password)
-            .addOnSuccessListener {
+            .addOnSuccessListener { authResult ->
+
+                val user = User(
+                    authResult.user!!.uid,
+                    email,
+                    password,
+                    "$name $surname",
+                    null,
+                    null,
+                    null,
+                    AppUtils.getCurrentDate(),
+                    userPremium = false,
+                    userAdmin = false
+                )
+
+                //Updates Firebase User name
                 repositoryManager.setFirebaseUserName("$name $surname")?.addOnSuccessListener {
-                    _user.value = repositoryManager.getFirebaseUser()
+
+                    //Saves User in the Firestore Database
+                    repositoryManager.saveUser(user).addOnSuccessListener {
+                        Log.w(TAG, "User saved in Firestore: ")
+                        _user.value = repositoryManager.getFirebaseUser()
+                    }.addOnFailureListener {
+                        Log.w(TAG, "User error in Firestore: " + it.message.toString())
+                        _errorMessage.value = R.string.register_some_error
+                    }
+
                 }?.addOnFailureListener {
                     _errorMessage.value = R.string.register_some_error
                 }
@@ -90,11 +117,34 @@ class LoginViewModel : ViewModel() {
 
     fun firebaseAuthWithGoogle(idToken: String) {
         val credential = GoogleAuthProvider.getCredential(idToken, null)
-        repositoryManager.signInFirebaseWithCredential(credential).addOnSuccessListener {
-            Log.w(TAG, "Signed with Google: " + it.user?.displayName.toString())
-            Log.w(TAG, "Signed with Google: " + it.user?.email.toString())
-            Log.w(TAG, "Signed with Google: " + it.user?.photoUrl.toString())
-            _user.value = repositoryManager.getFirebaseUser()
+        //Creates Firebase User with Google ID token
+        repositoryManager.signInFirebaseWithCredential(credential).addOnSuccessListener { authResult ->
+            Log.w(TAG, "Signed with Google: " + authResult.user?.displayName.toString())
+            Log.w(TAG, "Signed with Google: " + authResult.user?.email.toString())
+            Log.w(TAG, "Signed with Google: " + authResult.user?.photoUrl.toString())
+
+            val user = User(
+                authResult.user!!.uid,
+                authResult.user!!.email,
+                null,
+                authResult.user!!.displayName,
+                authResult.user!!.photoUrl.toString(),
+                null,
+                null,
+                AppUtils.getCurrentDate(),
+                userPremium = false,
+                userAdmin = false
+            )
+
+            //Saves User in the Firestore Database
+            repositoryManager.saveUser(user).addOnSuccessListener {
+                Log.w(TAG, "User saved in Firestore: ")
+                _user.value = repositoryManager.getFirebaseUser()
+            }.addOnFailureListener {
+                Log.w(TAG, "User error in Firestore: " + it.message.toString())
+                _errorMessage.value = R.string.register_some_error
+            }
+
         }.addOnFailureListener {
             when (it) {
                 is FirebaseAuthUserCollisionException -> _errorMessage.value =

@@ -10,9 +10,11 @@ import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.AuthCredential
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.firestore.DocumentSnapshot
 import eu.balticit.copyrightly.R
 import eu.balticit.copyrightly.data.firebase.AppFirebaseHelper
 import eu.balticit.copyrightly.data.firebase.FirebaseHelper
+import eu.balticit.copyrightly.data.firebase.model.User
 
 
 /**
@@ -77,6 +79,18 @@ class AppRepositoryManager() : RepositoryManager {
 
     override fun setFirebaseUserProfile(userName: String, userPhotoUrl: String?): Task<Void>? {
         return setFirebaseUserProfile(userName, userPhotoUrl)
+    }
+
+    override fun saveUser(user: User): Task<Void> {
+        return mFirebaseHelper.saveUser(user)
+    }
+
+    override fun updateUser(user: User): Task<Void> {
+        return mFirebaseHelper.updateUser(user)
+    }
+
+    override fun getUser(userId: String): Task<DocumentSnapshot> {
+        return mFirebaseHelper.getUser(userId)
     }
     //private val mNetworkHelper: NetworkHelper? = null
 }

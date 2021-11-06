@@ -5,7 +5,14 @@ import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.*
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.auth.ktx.userProfileChangeRequest
+import com.google.firebase.firestore.DocumentReference
+import com.google.firebase.firestore.DocumentSnapshot
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.SetOptions
+import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import eu.balticit.copyrightly.data.firebase.model.User
+import eu.balticit.copyrightly.utils.AppConstants
 
 
 /**
@@ -13,12 +20,12 @@ import com.google.firebase.ktx.Firebase
  */
 class AppFirebaseHelper : FirebaseHelper {
 
-    //private final FirebaseFirestore mFirestore;
+    private val mFirestore: FirebaseFirestore
     private val mAuth: FirebaseAuth
     //private final FirebaseStorage mStorage;
 
     init {
-        //mFirestore = FirebaseFirestore.getInstance();
+        mFirestore = Firebase.firestore
         mAuth = Firebase.auth
         //mStorage = FirebaseStorage.getInstance();
     }
@@ -84,5 +91,26 @@ class AppFirebaseHelper : FirebaseHelper {
         }
         return mAuth.currentUser?.updateProfile(profileUpdates)
     }
+
+    //=//=// F I R E B A S E  -  F I R E S T O R E //=//=//
+
+    override fun saveUser(user: User): Task<Void> {
+        return mFirestore.collection(AppConstants.USERS_COLLECTION)
+            .document(user.userId)
+            .set(user)
+    }
+
+    override fun updateUser(user: User): Task<Void> {
+        return mFirestore.collection(AppConstants.USERS_COLLECTION)
+            .document(user.userId)
+            .set(user, SetOptions.merge())
+    }
+
+    override fun getUser(userId: String): Task<DocumentSnapshot> {
+        val docRef: DocumentReference =
+            mFirestore.collection(AppConstants.USERS_COLLECTION).document(userId)
+        return docRef.get()
+    }
+
 
 }

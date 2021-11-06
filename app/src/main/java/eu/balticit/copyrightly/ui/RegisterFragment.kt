@@ -12,6 +12,9 @@ import eu.balticit.copyrightly.databinding.FragmentRegisterBinding
 import eu.balticit.copyrightly.utils.AppUtils
 import eu.balticit.copyrightly.viewmodels.LoginViewModel
 
+/**
+ * Register fragment. Creates Firebase User account with email/password.
+ */
 class RegisterFragment : BaseFragment() {
 
     private val loginViewModel: LoginViewModel by activityViewModels()

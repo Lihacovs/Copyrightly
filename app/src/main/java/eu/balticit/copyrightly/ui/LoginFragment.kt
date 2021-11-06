@@ -16,7 +16,14 @@ import eu.balticit.copyrightly.databinding.FragmentLoginBinding
 import eu.balticit.copyrightly.utils.AppUtils
 import eu.balticit.copyrightly.viewmodels.LoginViewModel
 
-
+/**
+ * Login Activity. There are 3 methods to get user profile: Internal FireBase, Google, Facebook.
+ * <p>
+ * App authentication used overall flow described in:
+ * 1.FireBase Password login docs: https://firebase.google.com/docs/auth/android/password-auth
+ * 2.Google profile login docs: https://firebase.google.com/docs/auth/android/google-signin
+ * 3.Facebook profile login docs: https://firebase.google.com/docs/auth/android/facebook-login
+ */
 class LoginFragment : BaseFragment() {
 
     private val TAG = "Login"

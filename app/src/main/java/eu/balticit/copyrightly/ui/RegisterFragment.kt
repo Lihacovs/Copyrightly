@@ -4,18 +4,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
-import com.google.android.material.snackbar.Snackbar
 import eu.balticit.copyrightly.R
 import eu.balticit.copyrightly.base.BaseFragment
 import eu.balticit.copyrightly.databinding.FragmentRegisterBinding
 import eu.balticit.copyrightly.utils.AppUtils
 import eu.balticit.copyrightly.viewmodels.LoginViewModel
-import eu.balticit.copyrightly.viewmodels.RegisterViewModel
 
 class RegisterFragment : BaseFragment() {
 
@@ -39,7 +34,6 @@ class RegisterFragment : BaseFragment() {
         }
 
         binding.btnRegisterRegister.setOnClickListener { view ->
-            hideKeyboard()
             val userEmail: String = binding.etRegisterEmail.text.toString()
             val userPassword: String = binding.etRegisterPassword.text.toString()
             val userName: String = binding.etRegisterName.text.toString()
@@ -58,6 +52,7 @@ class RegisterFragment : BaseFragment() {
                 userSurname.isEmpty() -> showSnackbar(R.string.register_empty_surname, view)
                 userName.length < 2 -> showSnackbar(R.string.register_short_name, view)
                 else -> {
+                    hideKeyboard()
                     showLoading()
                     loginViewModel.createFirebaseUser(
                         userEmail,
@@ -73,7 +68,7 @@ class RegisterFragment : BaseFragment() {
             hideLoading()
         })
 
-        loginViewModel.errorMessage.observe(viewLifecycleOwner, Observer {
+        loginViewModel.errorMessage.observe(viewLifecycleOwner, {
             hideLoading()
             showSnackbar(it, root)
         })

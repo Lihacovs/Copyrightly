@@ -1,30 +1,36 @@
 package eu.balticit.copyrightly.viewmodels
 
+import android.app.Activity
+import android.content.Intent
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
-import com.google.firebase.auth.FirebaseAuthInvalidUserException
-import com.google.firebase.auth.FirebaseAuthUserCollisionException
-import com.google.firebase.auth.FirebaseUser
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.firebase.auth.*
 import eu.balticit.copyrightly.MyApp
 import eu.balticit.copyrightly.R
 import eu.balticit.copyrightly.data.AppRepositoryManager
 
 
+/**
+ * Login ViewModel used in [eu.balticit.copyrightly.ui.LoginFragment],
+ * [eu.balticit.copyrightly.ui.RegisterFragment],
+ * [eu.balticit.copyrightly.MainActivity]
+ * When user perform login with Google [firebaseAuthWithGoogle]
+ * or Facebook [] user data is stored in 2 places:
+ * 1. Firebase Authentication system - for user authentication.
+ * 2. Firestore DB - general [eu.balticit.copyrightly.data.firebase.model.User] profile storage place.
+ */
 class LoginViewModel : ViewModel() {
 
+    private val TAG = "Login"
     private val repositoryManager: AppRepositoryManager = MyApp.repositoryManager
-
 
     private val _errorMessage = MutableLiveData<Int>()
     val errorMessage: LiveData<Int> = _errorMessage
-
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is Login Fragment"
-    }
-    val text: LiveData<String> = _text
 
     private val _user = MutableLiveData<FirebaseUser?>().apply {
         value = repositoryManager.getFirebaseUser()
@@ -80,5 +86,30 @@ class LoginViewModel : ViewModel() {
                     else -> _errorMessage.value = R.string.register_some_error
                 }
             }
+    }
+
+    fun firebaseAuthWithGoogle(idToken: String) {
+        val credential = GoogleAuthProvider.getCredential(idToken, null)
+        repositoryManager.signInFirebaseWithCredential(credential).addOnSuccessListener {
+            Log.w(TAG, "Signed with Google: " + it.user?.displayName.toString())
+            Log.w(TAG, "Signed with Google: " + it.user?.email.toString())
+            Log.w(TAG, "Signed with Google: " + it.user?.photoUrl.toString())
+            _user.value = repositoryManager.getFirebaseUser()
+        }.addOnFailureListener {
+            when (it) {
+                is FirebaseAuthUserCollisionException -> _errorMessage.value =
+                    R.string.register_email_already_used
+                else -> _errorMessage.value = R.string.register_some_error
+            }
+        }
+    }
+
+    //Used in LoginFragment and MainActivity to perform Google login/logout action
+    fun getGoogleSignInClient(activity: Activity): GoogleSignInClient {
+        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestIdToken(activity.getString(R.string.GOOGLE_WEB_CLIENT_ID_TOKEN))
+            .requestEmail()
+            .build()
+        return GoogleSignIn.getClient(activity, gso)
     }
 }

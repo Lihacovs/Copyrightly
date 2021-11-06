@@ -6,10 +6,8 @@ import android.view.Menu
 import android.view.View
 import android.widget.TextView
 import androidx.activity.viewModels
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
-import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
@@ -56,8 +54,8 @@ class MainActivity : BaseActivity() {
 
         val headerLayout: View = navView.getHeaderView(0)
 
-        loginViewModel.user.observe(this, Observer {
-            Log.d("LoginViewModelTAG", "Observer triggered: " + it?.displayName.toString())
+        loginViewModel.user.observe(this, {
+            //Log.d("LoginViewModelTAG", "Observer triggered: " + it?.displayName.toString())
             if (it != null) {
                 navView.menu.findItem(R.id.nav_login).isVisible = false
                 navView.menu.findItem(R.id.nav_logout).isVisible = true
@@ -78,20 +76,11 @@ class MainActivity : BaseActivity() {
             }
         })
 
-        /*if (loginViewModel.user.value == null) {
-            navView.menu.findItem(R.id.nav_login).isVisible = true
-            navView.menu.findItem(R.id.nav_logout).isVisible = false
-        } else {
-            navView.menu.findItem(R.id.nav_login).isVisible = false
-            navView.menu.findItem(R.id.nav_logout).isVisible = true
-        }*/
-
-        //TODO:logout
         navView.menu.findItem(R.id.nav_logout).setOnMenuItemClickListener { MenuItem ->
             when (MenuItem!!.itemId) {
                 R.id.nav_logout -> {
-                    //Log.d("MainActivityTAG", loginViewModel.userId.value.toString())
                     loginViewModel.signOutUser()
+                    loginViewModel.getGoogleSignInClient(this).signOut()
                     drawerLayout.closeDrawer(GravityCompat.START)
                 }
             }

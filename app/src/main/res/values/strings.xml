@@ -19,6 +19,8 @@
     <string name="app_google_play_store_link">"https://play.google.com/store/apps/details?id="</string>
     <string name="app_market_link">"market://details?id="</string>
 
+    <string name="GOOGLE_WEB_CLIENT_ID_TOKEN">831946465997-fudemm5igmf4fkalctb1a981ploe47mq.apps.googleusercontent.com</string>
+
     <!--ui.About-->
     <string name="email_subject">Suggestion to improve App</string>
     <string name="email_body">Enter your message here</string>

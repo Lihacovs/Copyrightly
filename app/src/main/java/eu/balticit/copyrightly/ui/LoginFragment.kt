@@ -1,25 +1,26 @@
 package eu.balticit.copyrightly.ui
 
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.activity.viewModels
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
-import com.google.android.material.snackbar.Snackbar
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.common.api.ApiException
 import eu.balticit.copyrightly.R
 import eu.balticit.copyrightly.base.BaseFragment
 import eu.balticit.copyrightly.databinding.FragmentLoginBinding
 import eu.balticit.copyrightly.utils.AppUtils
 import eu.balticit.copyrightly.viewmodels.LoginViewModel
 
+
 class LoginFragment : BaseFragment() {
 
+    private val TAG = "Login"
+    private val RC_SIGN_IN = 9001
     private val loginViewModel: LoginViewModel by activityViewModels()
     private var _binding: FragmentLoginBinding? = null
 
@@ -36,9 +37,7 @@ class LoginFragment : BaseFragment() {
         _binding = FragmentLoginBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-
         binding.btnLoginServer.setOnClickListener { view ->
-            hideKeyboard()
             val email: String = binding.etLoginEmail.text.toString()
             val password: String = binding.etLoginPassword.text.toString()
             when {
@@ -46,41 +45,57 @@ class LoginFragment : BaseFragment() {
                 !AppUtils.isValidEmail(email) -> showSnackbar(R.string.login_invalid_email, view)
                 password.isEmpty() -> showSnackbar(R.string.login_empty_password, view)
                 password.length < 6 -> showSnackbar(R.string.login_short_password, view)
-                else ->{
+                else -> {
+                    hideKeyboard()
                     showLoading()
                     loginViewModel.signInFirebaseUser(email, password)
                 }
             }
         }
 
-        loginViewModel.user.observe(viewLifecycleOwner, Observer {
+        loginViewModel.user.observe(viewLifecycleOwner, {
             hideLoading()
         })
 
-        loginViewModel.errorMessage.observe(viewLifecycleOwner, Observer {
+        loginViewModel.errorMessage.observe(viewLifecycleOwner, {
             hideLoading()
             showSnackbar(it, root)
         })
 
         binding.btnLoginGoogle.setOnClickListener { view ->
-            Snackbar.make(view, "Login through Google", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
+            val signInIntent =
+                loginViewModel.getGoogleSignInClient(requireActivity()).signInIntent
+            startActivityForResult(signInIntent, RC_SIGN_IN)
         }
 
         binding.btnLoginFacebook.setOnClickListener { view ->
-            Snackbar.make(view, "Login through Facebook", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
+            showSnackbar("Facebook login: In development", view)
         }
 
         binding.btnLoginRegister.setOnClickListener { view ->
             view.findNavController().navigate(R.id.action_nav_login_to_nav_register)
         }
 
-        /*val textView: TextView = binding.textLogin
-        loginViewModel.text.observe(viewLifecycleOwner, Observer {
-            textView.text = it
-        })*/
         return root
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
+        if (requestCode == RC_SIGN_IN) {
+            showLoading()
+            val task = GoogleSignIn.getSignedInAccountFromIntent(data)
+            try {
+                // Google Sign In was successful, authenticate with Firebase
+                val account = task.getResult(ApiException::class.java)!!
+                Log.d(TAG, "firebaseAuthWithGoogle:" + account.id)
+                loginViewModel.firebaseAuthWithGoogle(account.idToken!!)
+            } catch (e: ApiException) {
+                // Google Sign In failed, update UI appropriately
+                Log.w(TAG, "Google sign in failed", e)
+                hideLoading()
+            }
+        }
     }
 
     override fun onDestroyView() {

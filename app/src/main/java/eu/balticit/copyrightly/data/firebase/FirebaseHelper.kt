@@ -5,6 +5,7 @@ import com.google.firebase.auth.AuthCredential
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.DocumentSnapshot
+import com.google.firebase.firestore.Query
 import eu.balticit.copyrightly.data.firebase.model.User
 
 
@@ -49,4 +50,6 @@ interface FirebaseHelper {
     fun updateFirestoreUser(user: User): Task<Void>
 
     fun getFirestoreUser(userId: String): Task<DocumentSnapshot>
+
+    fun getTopicsQuery(): Query
 }

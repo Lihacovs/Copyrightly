@@ -5,10 +5,7 @@ import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.*
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.auth.ktx.userProfileChangeRequest
-import com.google.firebase.firestore.DocumentReference
-import com.google.firebase.firestore.DocumentSnapshot
-import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.SetOptions
+import com.google.firebase.firestore.*
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import eu.balticit.copyrightly.data.firebase.model.User
@@ -112,5 +109,7 @@ class AppFirebaseHelper : FirebaseHelper {
         return docRef.get()
     }
 
-
+    override fun getTopicsQuery(): Query {
+        return mFirestore.collection("topics")
+    }
 }

@@ -8,10 +8,13 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import eu.balticit.copyrightly.adapters.TopicAdapter
 import eu.balticit.copyrightly.databinding.FragmentLearnBinding
 import eu.balticit.copyrightly.viewmodels.LearnViewModel
 
 class LearnFragment : Fragment() {
+
+    lateinit var topicAdapter: TopicAdapter
 
     private lateinit var learnViewModel: LearnViewModel
     private var _binding: FragmentLearnBinding? = null
@@ -31,6 +34,11 @@ class LearnFragment : Fragment() {
         _binding = FragmentLearnBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
+        topicAdapter = TopicAdapter(learnViewModel.getFirestoreQueryOptions())
+        binding.rvTopicList.adapter = topicAdapter
+        topicAdapter.startListening()
+
+
         val textView: TextView = binding.textLearn
         learnViewModel.text.observe(viewLifecycleOwner, Observer {
             textView.text = it
@@ -40,6 +48,9 @@ class LearnFragment : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
+        topicAdapter.stopListening()
+
+
         _binding = null
     }
 }

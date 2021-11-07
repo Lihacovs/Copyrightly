@@ -5,6 +5,7 @@ import com.google.firebase.auth.AuthCredential
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.DocumentSnapshot
+import com.google.firebase.firestore.Query
 import eu.balticit.copyrightly.data.firebase.AppFirebaseHelper
 import eu.balticit.copyrightly.data.firebase.FirebaseHelper
 import eu.balticit.copyrightly.data.firebase.model.User
@@ -84,6 +85,10 @@ class AppRepositoryManager() : RepositoryManager {
 
     override fun getFirestoreUser(userId: String): Task<DocumentSnapshot> {
         return mFirebaseHelper.getFirestoreUser(userId)
+    }
+
+    override fun getTopicsQuery(): Query {
+        return mFirebaseHelper.getTopicsQuery()
     }
     //private val mNetworkHelper: NetworkHelper? = null
 }

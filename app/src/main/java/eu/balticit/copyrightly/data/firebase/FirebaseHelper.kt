@@ -56,4 +56,6 @@ interface FirebaseHelper {
     fun getLawsQuery(): Query
 
     fun getMaterialsQuery(): Query
+
+    fun getTypeDetailsQuery(typeId: String): Query
 }

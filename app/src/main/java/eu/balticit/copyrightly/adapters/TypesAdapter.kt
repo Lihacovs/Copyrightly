@@ -4,11 +4,13 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
 import eu.balticit.copyrightly.data.firebase.model.Type
 import eu.balticit.copyrightly.databinding.ListItemTypeBinding
+import eu.balticit.copyrightly.ui.LearnFragmentDirections
 
 class TypesAdapter(options: FirestoreRecyclerOptions<Type>) : FirestoreRecyclerAdapter<Type, RecyclerView.ViewHolder>(
     options
@@ -35,6 +37,7 @@ class TypesAdapter(options: FirestoreRecyclerOptions<Type>) : FirestoreRecyclerA
             binding.setClickListener {
                 binding.type.let { type ->
                     Log.w("Type", "Opens type: " + type!!.typeName)
+                    navigateToType(type, it)
                 }
             }
         }
@@ -47,7 +50,9 @@ class TypesAdapter(options: FirestoreRecyclerOptions<Type>) : FirestoreRecyclerA
         }
 
         private fun navigateToType(type: Type, view: View) {
-
+            val direction =
+                LearnFragmentDirections.actionNavLearnToNavTypeDetails(type.typeId)
+            view.findNavController().navigate(direction)
         }
     }
 }

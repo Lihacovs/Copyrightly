@@ -21,7 +21,27 @@
         android:id="@+id/nav_learn"
         android:name="eu.balticit.copyrightly.ui.LearnFragment"
         android:label="@string/menu_learn"
-        tools:layout="@layout/fragment_learn" />
+        tools:layout="@layout/fragment_learn_pager" >
+        <action
+            android:id="@+id/action_nav_learn_to_nav_type_details"
+            app:destination="@id/nav_type_details" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_types"
+        android:name="eu.balticit.copyrightly.ui.TypesFragment"
+        android:label="Types"
+        tools:layout="@layout/fragment_types" />
+
+    <fragment
+        android:id="@+id/nav_type_details"
+        android:name="eu.balticit.copyrightly.ui.TypeDetailsFragment"
+        android:label="TypeDetails"
+        tools:layout="@layout/fragment_type_details" >
+        <argument
+            android:name="typeId"
+            app:argType="string" />
+    </fragment>
 
     <fragment
         android:id="@+id/nav_profile"

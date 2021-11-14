@@ -9,6 +9,7 @@ import eu.balticit.copyrightly.data.AppRepositoryManager
 import eu.balticit.copyrightly.data.firebase.model.Law
 import eu.balticit.copyrightly.data.firebase.model.Material
 import eu.balticit.copyrightly.data.firebase.model.Type
+import eu.balticit.copyrightly.data.firebase.model.TypeDetail
 
 class LearnViewModel : ViewModel() {
 
@@ -32,5 +33,10 @@ class LearnViewModel : ViewModel() {
     fun getMaterialsFirestoreQueryOptions(): FirestoreRecyclerOptions<Material>{
         return FirestoreRecyclerOptions.Builder<Material>()
             .setQuery(repositoryManager.getMaterialsQuery(), Material::class.java).build()
+    }
+
+    fun getTypeDetailsFirestoreQueryOptions(typeId: String): FirestoreRecyclerOptions<TypeDetail>{
+        return FirestoreRecyclerOptions.Builder<TypeDetail>()
+            .setQuery(repositoryManager.getTypeDetailsQuery(typeId), TypeDetail::class.java).build()
     }
 }

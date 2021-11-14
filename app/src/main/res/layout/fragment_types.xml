@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.LearnFragment">
+    tools:context=".ui.TypesFragment">
 
     <TextView
-        android:id="@+id/text_learn"
+        android:id="@+id/text_types"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -20,7 +20,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_topic_list"
+        android:id="@+id/rv_types_list"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="8dp"
@@ -32,6 +32,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_learn"
-        tools:listitem="@layout/list_item_topic"/>
+        app:layout_constraintTop_toBottomOf="@+id/text_types"
+        tools:listitem="@layout/list_item_type"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -109,7 +109,15 @@ class AppFirebaseHelper : FirebaseHelper {
         return docRef.get()
     }
 
-    override fun getTopicsQuery(): Query {
-        return mFirestore.collection("topics")
+    override fun getTypesQuery(): Query {
+        return mFirestore.collection("types")
+    }
+
+    override fun getLawsQuery(): Query {
+        return mFirestore.collection("laws")
+    }
+
+    override fun getMaterialsQuery(): Query {
+        return mFirestore.collection("materials")
     }
 }

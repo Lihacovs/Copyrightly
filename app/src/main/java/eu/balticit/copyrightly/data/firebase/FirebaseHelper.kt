@@ -51,5 +51,9 @@ interface FirebaseHelper {
 
     fun getFirestoreUser(userId: String): Task<DocumentSnapshot>
 
-    fun getTopicsQuery(): Query
+    fun getTypesQuery(): Query
+
+    fun getLawsQuery(): Query
+
+    fun getMaterialsQuery(): Query
 }

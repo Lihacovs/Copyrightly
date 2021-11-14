@@ -87,8 +87,16 @@ class AppRepositoryManager() : RepositoryManager {
         return mFirebaseHelper.getFirestoreUser(userId)
     }
 
-    override fun getTopicsQuery(): Query {
-        return mFirebaseHelper.getTopicsQuery()
+    override fun getTypesQuery(): Query {
+        return mFirebaseHelper.getTypesQuery()
+    }
+
+    override fun getLawsQuery(): Query {
+        return mFirebaseHelper.getLawsQuery()
+    }
+
+    override fun getMaterialsQuery(): Query {
+        return mFirebaseHelper.getMaterialsQuery()
     }
     //private val mNetworkHelper: NetworkHelper? = null
 }

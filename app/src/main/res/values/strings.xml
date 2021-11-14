@@ -26,6 +26,11 @@
     <string name="email_body">Enter your message here</string>
     <string name="email_chooser_title">Send Email</string>
 
+    <!--ui.Learn-->
+    <string name="learn_topic_types">Types</string>
+    <string name="learn_topic_laws">Laws</string>
+    <string name="learn_topic_material">Material</string>
+
     <!--ui.Login-->
     <string name="login_empty_email">Please enter your Email</string>
     <string name="login_invalid_email">Please enter a valid Email</string>

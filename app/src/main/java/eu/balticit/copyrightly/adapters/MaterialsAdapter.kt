@@ -4,11 +4,13 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
 import eu.balticit.copyrightly.data.firebase.model.Material
 import eu.balticit.copyrightly.databinding.ListItemMaterialBinding
+import eu.balticit.copyrightly.ui.LearnFragmentDirections
 
 class MaterialsAdapter(options: FirestoreRecyclerOptions<Material>) :
     FirestoreRecyclerAdapter<Material, RecyclerView.ViewHolder>(
@@ -36,6 +38,7 @@ class MaterialsAdapter(options: FirestoreRecyclerOptions<Material>) :
             binding.setClickListener {
                 binding.material.let { material ->
                     Log.w("Material", "Opens material: " + material!!.materialName)
+                    navigateToMaterial(material, it)
                 }
             }
         }
@@ -48,7 +51,9 @@ class MaterialsAdapter(options: FirestoreRecyclerOptions<Material>) :
         }
 
         private fun navigateToMaterial(material: Material, view: View) {
-
+            val direction =
+                LearnFragmentDirections.actionNavLearnToNavMaterialDetails(material.materialId)
+            view.findNavController().navigate(direction)
         }
     }
 }

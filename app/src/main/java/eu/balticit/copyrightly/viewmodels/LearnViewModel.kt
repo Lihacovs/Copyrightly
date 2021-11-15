@@ -6,10 +6,7 @@ import androidx.lifecycle.ViewModel
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
 import eu.balticit.copyrightly.MyApp
 import eu.balticit.copyrightly.data.AppRepositoryManager
-import eu.balticit.copyrightly.data.firebase.model.Law
-import eu.balticit.copyrightly.data.firebase.model.Material
-import eu.balticit.copyrightly.data.firebase.model.Type
-import eu.balticit.copyrightly.data.firebase.model.TypeDetail
+import eu.balticit.copyrightly.data.firebase.model.*
 
 class LearnViewModel : ViewModel() {
 
@@ -20,23 +17,36 @@ class LearnViewModel : ViewModel() {
     }
     val text: LiveData<String> = _text
 
-    fun getTypesFirestoreQueryOptions(): FirestoreRecyclerOptions<Type>{
+    fun getTypesFirestoreQueryOptions(): FirestoreRecyclerOptions<Type> {
         return FirestoreRecyclerOptions.Builder<Type>()
             .setQuery(repositoryManager.getTypesQuery(), Type::class.java).build()
     }
 
-    fun getLawsFirestoreQueryOptions(): FirestoreRecyclerOptions<Law>{
+    fun getLawsFirestoreQueryOptions(): FirestoreRecyclerOptions<Law> {
         return FirestoreRecyclerOptions.Builder<Law>()
             .setQuery(repositoryManager.getLawsQuery(), Law::class.java).build()
     }
 
-    fun getMaterialsFirestoreQueryOptions(): FirestoreRecyclerOptions<Material>{
+    fun getMaterialsFirestoreQueryOptions(): FirestoreRecyclerOptions<Material> {
         return FirestoreRecyclerOptions.Builder<Material>()
             .setQuery(repositoryManager.getMaterialsQuery(), Material::class.java).build()
     }
 
-    fun getTypeDetailsFirestoreQueryOptions(typeId: String): FirestoreRecyclerOptions<TypeDetail>{
+    fun getTypeDetailsFirestoreQueryOptions(typeId: String): FirestoreRecyclerOptions<TypeDetail> {
         return FirestoreRecyclerOptions.Builder<TypeDetail>()
             .setQuery(repositoryManager.getTypeDetailsQuery(typeId), TypeDetail::class.java).build()
+    }
+
+    fun getLawDetailsFirestoreQueryOptions(lawId: String): FirestoreRecyclerOptions<LawDetail> {
+        return FirestoreRecyclerOptions.Builder<LawDetail>()
+            .setQuery(repositoryManager.getLawDetailsQuery(lawId), LawDetail::class.java).build()
+    }
+
+    fun getMaterialDetailsFirestoreQueryOptions(materialId: String): FirestoreRecyclerOptions<MaterialDetail> {
+        return FirestoreRecyclerOptions.Builder<MaterialDetail>()
+            .setQuery(
+                repositoryManager.getMaterialDetailsQuery(materialId),
+                MaterialDetail::class.java
+            ).build()
     }
 }

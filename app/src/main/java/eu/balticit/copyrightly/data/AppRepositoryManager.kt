@@ -102,5 +102,13 @@ class AppRepositoryManager() : RepositoryManager {
     override fun getTypeDetailsQuery(typeId: String): Query {
         return mFirebaseHelper.getTypeDetailsQuery(typeId)
     }
+
+    override fun getLawDetailsQuery(lawId: String): Query {
+        return mFirebaseHelper.getLawDetailsQuery(lawId)
+    }
+
+    override fun getMaterialDetailsQuery(materialId: String): Query {
+        return mFirebaseHelper.getMaterialDetailsQuery(materialId)
+    }
     //private val mNetworkHelper: NetworkHelper? = null
 }

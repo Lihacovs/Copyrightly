@@ -4,11 +4,13 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
 import eu.balticit.copyrightly.data.firebase.model.Law
 import eu.balticit.copyrightly.databinding.ListItemLawBinding
+import eu.balticit.copyrightly.ui.LearnFragmentDirections
 
 class LawsAdapter(options: FirestoreRecyclerOptions<Law>) :
     FirestoreRecyclerAdapter<Law, RecyclerView.ViewHolder>(
@@ -36,6 +38,7 @@ class LawsAdapter(options: FirestoreRecyclerOptions<Law>) :
             binding.setClickListener {
                 binding.law.let { law ->
                     Log.w("Law", "Opens law: " + law!!.lawName)
+                    navigateToLaw(law, it)
                 }
             }
         }
@@ -48,7 +51,9 @@ class LawsAdapter(options: FirestoreRecyclerOptions<Law>) :
         }
 
         private fun navigateToLaw(law: Law, view: View) {
-
+            val direction =
+                LearnFragmentDirections.actionNavLearnToNavLawDetails(law.lawId)
+            view.findNavController().navigate(direction)
         }
     }
 }

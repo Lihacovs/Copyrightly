@@ -12,9 +12,10 @@ import eu.balticit.copyrightly.data.firebase.model.Type
 import eu.balticit.copyrightly.databinding.ListItemTypeBinding
 import eu.balticit.copyrightly.ui.LearnFragmentDirections
 
-class TypesAdapter(options: FirestoreRecyclerOptions<Type>) : FirestoreRecyclerAdapter<Type, RecyclerView.ViewHolder>(
-    options
-) {
+class TypesAdapter(options: FirestoreRecyclerOptions<Type>) :
+    FirestoreRecyclerAdapter<Type, RecyclerView.ViewHolder>(
+        options
+    ) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return TypesAdapter.TypeViewHolder(
             ListItemTypeBinding.inflate(

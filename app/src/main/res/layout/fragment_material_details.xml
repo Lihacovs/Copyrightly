@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.TypeDetailsFragment">
+    tools:context=".ui.MaterialDetailsFragment">
 
     <TextView
-        android:id="@+id/text_type_details"
+        android:id="@+id/text_material_details"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -20,7 +20,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_type_details_list"
+        android:id="@+id/rv_material_details_list"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="8dp"
@@ -32,6 +32,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_type_details"
-        tools:listitem="@layout/list_item_type_detail"/>
+        app:layout_constraintTop_toBottomOf="@+id/text_material_details"
+        tools:listitem="@layout/list_item_material_detail"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -8,20 +8,20 @@ import android.widget.TextView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
-import eu.balticit.copyrightly.adapters.LawsAdapter
+import eu.balticit.copyrightly.adapters.LawDetailsAdapter
 import eu.balticit.copyrightly.adapters.TypeDetailsAdapter
 import eu.balticit.copyrightly.base.BaseFragment
-import eu.balticit.copyrightly.databinding.FragmentLawsBinding
+import eu.balticit.copyrightly.databinding.FragmentLawDetailsBinding
 import eu.balticit.copyrightly.databinding.FragmentTypeDetailsBinding
 import eu.balticit.copyrightly.viewmodels.LearnViewModel
 
-class TypeDetailsFragment : BaseFragment() {
-    lateinit var typeDetailsAdapter: TypeDetailsAdapter
+class LawDetailsFragment: BaseFragment() {
+    lateinit var lawDetailsAdapter: LawDetailsAdapter
 
     private lateinit var learnViewModel: LearnViewModel
-    private var _binding: FragmentTypeDetailsBinding? = null
+    private var _binding: FragmentLawDetailsBinding? = null
 
-    val args: TypeDetailsFragmentArgs by navArgs()
+    val args: LawDetailsFragmentArgs by navArgs()
 
 
     // This property is only valid between onCreateView and
@@ -36,16 +36,16 @@ class TypeDetailsFragment : BaseFragment() {
         learnViewModel =
             ViewModelProvider(this).get(LearnViewModel::class.java)
 
-        _binding = FragmentTypeDetailsBinding.inflate(inflater, container, false)
+        _binding = FragmentLawDetailsBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        typeDetailsAdapter =
-            TypeDetailsAdapter(learnViewModel.getTypeDetailsFirestoreQueryOptions(args.typeId))
-        binding.rvTypeDetailsList.adapter = typeDetailsAdapter
-        typeDetailsAdapter.startListening()
+        lawDetailsAdapter =
+            LawDetailsAdapter(learnViewModel.getLawDetailsFirestoreQueryOptions(args.lawId))
+        binding.rvLawDetailsList.adapter = lawDetailsAdapter
+        lawDetailsAdapter.startListening()
 
 
-        val textView: TextView = binding.textTypeDetails
+        val textView: TextView = binding.textLawDetails
         learnViewModel.text.observe(viewLifecycleOwner, Observer {
             textView.text = it
         })
@@ -54,7 +54,7 @@ class TypeDetailsFragment : BaseFragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
-        typeDetailsAdapter.stopListening()
+        lawDetailsAdapter.stopListening()
         _binding = null
     }
 }

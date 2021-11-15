@@ -125,4 +125,14 @@ class AppFirebaseHelper : FirebaseHelper {
         return mFirestore.collection("types")
             .document(typeId).collection("typeDetails")
     }
+
+    override fun getLawDetailsQuery(lawId: String): Query {
+        return mFirestore.collection("laws")
+            .document(lawId).collection("lawDetails")
+    }
+
+    override fun getMaterialDetailsQuery(materialId: String): Query {
+        return mFirestore.collection("materials")
+            .document(materialId).collection("materialDetails")
+    }
 }

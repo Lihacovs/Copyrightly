@@ -38,7 +38,7 @@ class LearnFragment : BaseFragment() {
 
         // Set the icon and text for each tab
         TabLayoutMediator(tabLayout, viewPager) { tab, position ->
-            //tab.setIcon(getTabIcon(position))
+            tab.setIcon(getTabIcon(position))
             tab.text = getTabTitle(position)
         }.attach()
 
@@ -59,6 +59,15 @@ class LearnFragment : BaseFragment() {
             LAWS_PAGE_INDEX -> getString(R.string.learn_topic_laws)
             MATERIAL_PAGE_INDEX -> getString(R.string.learn_topic_material)
             else -> null
+        }
+    }
+
+    private fun getTabIcon(position: Int): Int {
+        return when (position) {
+            TYPES_PAGE_INDEX -> R.drawable.outline_copyright_24
+            LAWS_PAGE_INDEX -> R.drawable.outline_gavel_24
+            MATERIAL_PAGE_INDEX -> R.drawable.outline_auto_stories_24
+            else -> throw IndexOutOfBoundsException()
         }
     }
 }

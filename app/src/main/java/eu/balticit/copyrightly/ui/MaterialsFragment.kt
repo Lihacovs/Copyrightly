@@ -37,11 +37,6 @@ class MaterialsFragment : BaseFragment() {
         binding.rvMaterialList.adapter = materialsAdapter
         materialsAdapter.startListening()
 
-
-        val textView: TextView = binding.textMaterial
-        learnViewModel.text.observe(viewLifecycleOwner, Observer {
-            textView.text = it
-        })
         return root
     }
 

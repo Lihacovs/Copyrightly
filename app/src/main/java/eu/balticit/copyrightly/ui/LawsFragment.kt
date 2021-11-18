@@ -37,11 +37,6 @@ class LawsFragment: BaseFragment() {
         binding.rvLawList.adapter = lawsAdapter
         lawsAdapter.startListening()
 
-
-        val textView: TextView = binding.textLaw
-        learnViewModel.text.observe(viewLifecycleOwner, Observer {
-            textView.text = it
-        })
         return root
     }
 

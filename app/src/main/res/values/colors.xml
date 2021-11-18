@@ -27,6 +27,8 @@
     <color name="dark_gray">#696969</color>
     <color name="bg_color">#f7f7f7</color>
     <color name="black_effective">#2a2a2a</color>
+    <color name="black_transparent">#802a2a2a</color>
+    <color name="YouTube_red_transparent">#80FF0000</color>
     <color name="shadow">#d0d8dc</color>
     <color name="transparent">#00000000</color>
     <color name="translucent_white">#88ffffff</color>

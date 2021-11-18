@@ -110,7 +110,7 @@ class AppFirebaseHelper : FirebaseHelper {
     }
 
     override fun getTypesQuery(): Query {
-        return mFirestore.collection("types")
+        return mFirestore.collection("types").orderBy("listOrderId")
     }
 
     override fun getLawsQuery(): Query {

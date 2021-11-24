@@ -36,7 +36,7 @@
                 android:contentDescription="Material Image"
                 android:scaleType="centerCrop"
                 app:imageFromUrl="@{material.imageUrl}"
-                app:layout_constraintDimensionRatio="H,5:3"
+                app:layout_constraintDimensionRatio="H,7:3"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />

@@ -44,11 +44,6 @@ class TypeDetailsFragment : BaseFragment() {
         binding.rvTypeDetailsList.adapter = typeDetailsAdapter
         typeDetailsAdapter.startListening()
 
-
-        val textView: TextView = binding.textTypeDetails
-        learnViewModel.text.observe(viewLifecycleOwner, Observer {
-            textView.text = it
-        })
         return root
     }
 

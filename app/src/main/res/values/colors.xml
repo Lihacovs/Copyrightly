@@ -34,4 +34,27 @@
     <color name="translucent_white">#88ffffff</color>
     <color name="fb">#3b5998</color>
     <color name="google">#d34836</color>
+
+    <!--BlackEffective-->
+    <color name="black_effective_1"> #ebebeb</color>
+    <color name="black_effective_2"> #d8d8d8</color>
+    <color name="black_effective_3"> #c4c4c4</color>
+    <color name="black_effective_4"> #b1b1b1</color>
+    <color name="black_effective_5"> #9e9e9e</color>
+    <color name="black_effective_6"> #8a8a8a</color>
+    <color name="black_effective_7"> #777777</color>
+    <color name="black_effective_8"> #646464</color>
+    <color name="black_effective_9"> #505050</color>
+    <color name="black_effective_10"> #3d3d3d</color>
+    <color name="black_effective_11"> #2a2a2a</color>
+    <color name="black_effective_12"> #272727</color>
+    <color name="black_effective_13"> #232323</color>
+    <color name="black_effective_14"> #1f1f1f</color>
+    <color name="black_effective_15"> #1b1b1b</color>
+    <color name="black_effective_16"> #171717</color>
+    <color name="black_effective_17"> #141414</color>
+    <color name="black_effective_18"> #101010</color>
+    <color name="black_effective_19"> #0c0c0c</color>
+    <color name="black_effective_20"> #080808</color>
+    <color name="black_effective_21"> #040404</color>
 </resources>

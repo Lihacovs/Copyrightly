@@ -13,19 +13,14 @@ class ProfileViewModel : ViewModel() {
     private val TAG = "Profile"
     private val repositoryManager: AppRepositoryManager = MyApp.repositoryManager
 
-
-    private val _text = MutableLiveData<String>().apply {
-        value = "User Profile"
-    }
-    val text: LiveData<String> = _text
-
-    fun getUserProfile(){
+    private val _user = MutableLiveData<User>().apply {
         repositoryManager.getFirestoreUser(repositoryManager.getFirebaseUserId()!!).addOnSuccessListener {
             val user = it.toObject(User::class.java)
-            _text.value = "User: " + user?.userName.toString()
+            value = user
         }.addOnFailureListener{
             Log.w(TAG, "Error: " + it.message.toString())
 
         }
     }
+    val user: LiveData<User> = _user
 }

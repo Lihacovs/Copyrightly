@@ -8,6 +8,7 @@ import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
@@ -17,6 +18,7 @@ import com.google.android.material.navigation.NavigationView
 import com.google.android.material.snackbar.Snackbar
 import eu.balticit.copyrightly.base.BaseActivity
 import eu.balticit.copyrightly.databinding.ActivityMainBinding
+import eu.balticit.copyrightly.databinding.NavHeaderMainBinding
 import eu.balticit.copyrightly.viewmodels.LoginViewModel
 
 class MainActivity : BaseActivity() {
@@ -24,6 +26,7 @@ class MainActivity : BaseActivity() {
     private val loginViewModel: LoginViewModel by viewModels()
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
+    private lateinit var navHeaderMainBinding: NavHeaderMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,6 +43,7 @@ class MainActivity : BaseActivity() {
         }
         val drawerLayout: DrawerLayout = binding.drawerLayout
         val navView: NavigationView = binding.navView
+        navHeaderMainBinding = NavHeaderMainBinding.bind(navView.getHeaderView(0))
         val navController = findNavController(R.id.nav_host_fragment_content_main)
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
@@ -52,27 +56,22 @@ class MainActivity : BaseActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
 
-        val headerLayout: View = navView.getHeaderView(0)
-
         loginViewModel.user.observe(this, {
             //Log.d("LoginViewModelTAG", "Observer triggered: " + it?.displayName.toString())
             if (it != null) {
                 navView.menu.findItem(R.id.nav_login).isVisible = false
                 navView.menu.findItem(R.id.nav_logout).isVisible = true
-                headerLayout.findViewById<TextView>(R.id.tv_drawer_header_user_name).text =
-                    it.displayName.toString()
-                headerLayout.findViewById<TextView>(R.id.tv_drawer_header_user_email).text =
-                    it.email.toString()
                 navController.navigate(R.id.nav_home)
 
             } else {
                 navView.menu.findItem(R.id.nav_login).isVisible = true
                 navView.menu.findItem(R.id.nav_logout).isVisible = false
-                headerLayout.findViewById<TextView>(R.id.tv_drawer_header_user_name).text =
-                    getString(R.string.drawer_header_user_name)
-                headerLayout.findViewById<TextView>(R.id.tv_drawer_header_user_email).text =
-                    getString(R.string.drawer_header_user_email)
                 navController.navigate(R.id.nav_login)
+            }
+
+            navHeaderMainBinding.apply {
+                user = it
+                executePendingBindings()
             }
         })
 

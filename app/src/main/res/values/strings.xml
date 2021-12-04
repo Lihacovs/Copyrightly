@@ -138,4 +138,15 @@
     <string name="fragment_register_terms">Proceeding register you agree with <b>Terms of Service</b></string>
     <string name="fragment_register_register">Register</string>
 
+    <!--res.layout.activity_profile-->
+    <string name="fragment_profile_user_image">User image</string>
+    <string name="fragment_profile_user_name">User name</string>
+    <string name="fragment_profile_user_email">User email</string>
+    <string name="fragment_profile_change_profile">Change Profile</string>
+
+    <!--ui.profile.Profile-->
+    <string name="profile_user_claims">Your Claims</string>
+    <string name="profile_user_messages">Your Messages</string>
+    <string name="profile_some_error">Some error occurred. Try again</string>
+
 </resources>

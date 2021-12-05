@@ -6,6 +6,7 @@
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
+    <string name="action_rate">Rate App</string>
 
     <string name="app_email" translatable="false">copyrightly@gmail.com</string>
     <string name="app_creator" translatable="false">Created by: Baltic Information Technologies for Copyrightly app</string>

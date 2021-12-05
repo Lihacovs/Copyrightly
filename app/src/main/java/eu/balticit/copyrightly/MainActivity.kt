@@ -3,6 +3,7 @@ package eu.balticit.copyrightly
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.widget.TextView
 import androidx.activity.viewModels
@@ -16,6 +17,7 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.snackbar.Snackbar
+import com.google.android.play.core.review.ReviewManagerFactory
 import eu.balticit.copyrightly.base.BaseActivity
 import eu.balticit.copyrightly.databinding.ActivityMainBinding
 import eu.balticit.copyrightly.databinding.NavHeaderMainBinding
@@ -30,7 +32,6 @@ class MainActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Log.d("LoginViewModelTAG", "On Create triggered")
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -50,7 +51,7 @@ class MainActivity : BaseActivity() {
         appBarConfiguration = AppBarConfiguration(
             setOf(
                 R.id.nav_home, R.id.nav_complain, R.id.nav_learn, R.id.nav_profile,
-                R.id.nav_rate, R.id.nav_about, R.id.nav_login
+                R.id.nav_about, R.id.nav_login
             ), drawerLayout
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
@@ -75,12 +76,23 @@ class MainActivity : BaseActivity() {
             }
         })
 
+        //TODO:Add onClick through data binding
         navView.menu.findItem(R.id.nav_logout).setOnMenuItemClickListener { MenuItem ->
             when (MenuItem!!.itemId) {
                 R.id.nav_logout -> {
                     loginViewModel.signOutUser()
                     loginViewModel.getGoogleSignInClient(this).signOut()
                     drawerLayout.closeDrawer(GravityCompat.START)
+                }
+            }
+            true
+        }
+
+        navView.menu.findItem(R.id.nav_rate).setOnMenuItemClickListener { MenuItem ->
+            when (MenuItem!!.itemId) {
+                R.id.nav_rate -> {
+                    drawerLayout.closeDrawer(GravityCompat.START)
+                    openInAppReview()
                 }
             }
             true
@@ -95,8 +107,44 @@ class MainActivity : BaseActivity() {
         return true
     }
 
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.action_rate -> {
+                openInAppReview()
+            }
+            R.id.action_settings -> {
+
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
     override fun onSupportNavigateUp(): Boolean {
         val navController = findNavController(R.id.nav_host_fragment_content_main)
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
+    }
+
+    //TODO: test function after App publish, rate only after auth???
+    private fun openInAppReview() {
+        val manager = ReviewManagerFactory.create(this)
+        val request = manager.requestReviewFlow()
+        request.addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                Log.d("MainActivity", "openInAppReview: Task Successful")
+                // We got the ReviewInfo object
+                val reviewInfo = task.result
+                val flow = manager.launchReviewFlow(this, reviewInfo)
+                flow.addOnCompleteListener { _ ->
+                    // The flow has finished. The API does not indicate whether the user
+                    // reviewed or not, or even whether the review dialog was shown. Thus, no
+                    // matter the result, we continue our app flow.
+                    Log.d("MainActivity", "openInAppReview: Flow Completed")
+
+                }
+            } else {
+                Log.d("MainActivity", "openInAppReview: Task Error")
+                // There was some problem, continue regardless of the result.
+            }
+        }
     }
 }

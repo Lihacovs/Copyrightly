@@ -11,11 +11,12 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import eu.balticit.copyrightly.R
+import eu.balticit.copyrightly.base.BaseFragment
 import eu.balticit.copyrightly.databinding.FragmentComplainBinding
 import eu.balticit.copyrightly.viewmodels.ComplainViewModel
 import eu.balticit.copyrightly.viewmodels.LoginViewModel
 
-class ComplainFragment : Fragment() {
+class ComplainFragment : BaseFragment() {
 
     private lateinit var complainViewModel: ComplainViewModel
     private lateinit var loginViewModel: LoginViewModel
@@ -43,7 +44,27 @@ class ComplainFragment : Fragment() {
                 findNavController().navigate(R.id.nav_login)
             }
         })
-        
+
+        binding.setClickListenerYouTube {
+            showSnackbar("Complain on YouTube", it)
+        }
+
+        binding.setClickListenerTikTok {
+            showSnackbar("Complain on TikTok", it)
+        }
+
+        binding.setClickListenerFacebook {
+            showSnackbar("Complain on Facebook", it)
+        }
+
+        binding.setClickListenerTwitter {
+            showSnackbar("Complain on Twitter", it)
+        }
+
+        binding.setClickListenerInstagram {
+            showSnackbar("Complain on Instagram", it)
+        }
+
         return root
     }
 

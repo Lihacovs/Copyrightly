@@ -43,11 +43,7 @@ class ComplainFragment : Fragment() {
                 findNavController().navigate(R.id.nav_login)
             }
         })
-
-        val textView: TextView = binding.textComplain
-        complainViewModel.text.observe(viewLifecycleOwner, Observer {
-            textView.text = it
-        })
+        
         return root
     }
 

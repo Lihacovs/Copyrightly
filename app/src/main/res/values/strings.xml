@@ -139,7 +139,7 @@
     <string name="fragment_register_terms">Proceeding register you agree with <b>Terms of Service</b></string>
     <string name="fragment_register_register">Register</string>
 
-    <!--res.layout.activity_profile-->
+    <!--res.layout.fragment_profile-->
     <string name="fragment_profile_user_image">User image</string>
     <string name="fragment_profile_user_name">User name</string>
     <string name="fragment_profile_user_email">User email</string>
@@ -150,4 +150,7 @@
     <string name="profile_user_messages">Your Messages</string>
     <string name="profile_some_error">Some error occurred. Try again</string>
 
+    <!--res.layout.fragment_complain-->
+    <string name="fragment_complain_platform_selection">Please select a platform where your copyrighted work was infringed:</string>
+    <string name="fragment_complain_abuse_notice">This is legal claim submission. Any abusive action can lead to your account termination or legal consequences.</string>
 </resources>

@@ -76,7 +76,7 @@ class MainActivity : BaseActivity() {
             }
         })
 
-        //TODO:Add onClick through data binding
+        //TODO:Add onClick through data binding?
         navView.menu.findItem(R.id.nav_logout).setOnMenuItemClickListener { MenuItem ->
             when (MenuItem!!.itemId) {
                 R.id.nav_logout -> {
@@ -88,6 +88,7 @@ class MainActivity : BaseActivity() {
             true
         }
 
+        //TODO:Add onClick through data binding?
         navView.menu.findItem(R.id.nav_rate).setOnMenuItemClickListener { MenuItem ->
             when (MenuItem!!.itemId) {
                 R.id.nav_rate -> {

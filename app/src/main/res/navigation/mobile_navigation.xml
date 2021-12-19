@@ -94,12 +94,6 @@
         tools:layout="@layout/fragment_about" />
 
     <fragment
-        android:id="@+id/nav_rate"
-        android:name="eu.balticit.copyrightly.ui.RateFragment"
-        android:label="@string/menu_rate"
-        tools:layout="@layout/fragment_rate" />
-
-    <fragment
         android:id="@+id/nav_login"
         android:name="eu.balticit.copyrightly.ui.LoginFragment"
         android:label="@string/menu_login"

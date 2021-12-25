@@ -75,7 +75,7 @@
     <string name="menu_rate">Rate Us</string>
     <string name="menu_login">Log In</string>
     <string name="menu_logout">Log Out</string>
-    <string name="menu_complaint_from">Complain Form</string>
+    <string name="menu_complaint_from">Complaint Form</string>
 
     <!--res.layout.fragment_about-->
     <string name="fragment_about_about_text">About</string>

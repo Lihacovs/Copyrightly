@@ -15,7 +15,21 @@
         android:id="@+id/nav_complain"
         android:name="eu.balticit.copyrightly.ui.ComplainFragment"
         android:label="@string/menu_complain"
-        tools:layout="@layout/fragment_complain" />
+        tools:layout="@layout/fragment_complain" >
+        <action
+            android:id="@+id/action_nav_complain_to_nav_complain_form_1"
+            app:destination="@id/nav_complain_form_1" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_complain_form_1"
+        android:name="eu.balticit.copyrightly.ui.ComplainFormFragment"
+        android:label="@string/menu_complaint_from"
+        tools:layout="@layout/fragment_complain_form_1" >
+        <argument
+            android:name="platformId"
+            app:argType="string" />
+    </fragment>
 
     <fragment
         android:id="@+id/nav_learn"

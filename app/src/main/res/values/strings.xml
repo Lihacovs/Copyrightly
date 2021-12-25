@@ -75,6 +75,7 @@
     <string name="menu_rate">Rate Us</string>
     <string name="menu_login">Log In</string>
     <string name="menu_logout">Log Out</string>
+    <string name="menu_complaint_from">Complain Form</string>
 
     <!--res.layout.fragment_about-->
     <string name="fragment_about_about_text">About</string>
@@ -153,4 +154,5 @@
     <!--res.layout.fragment_complain-->
     <string name="fragment_complain_platform_selection">Please select a platform where your copyrighted work was infringed:</string>
     <string name="fragment_complain_abuse_notice">This is legal claim submission. Any abusive action can lead to your account termination or legal consequences.</string>
+    <string name="fragment_complain_form_ask_url">Please submit a URL link for your infringed content</string>
 </resources>

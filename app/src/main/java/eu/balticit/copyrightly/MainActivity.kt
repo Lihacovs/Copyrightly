@@ -1,11 +1,13 @@
 package eu.balticit.copyrightly
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
@@ -99,8 +101,12 @@ class MainActivity : BaseActivity() {
             true
         }
 
-
+        //TODO: add to ComplaintForm Frgment
+        val extras = intent.extras
+        val message = extras!!.getString(Intent.EXTRA_TEXT)
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
+
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.

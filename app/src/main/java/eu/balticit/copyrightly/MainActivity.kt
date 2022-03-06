@@ -101,7 +101,7 @@ class MainActivity : BaseActivity() {
             true
         }
 
-        //TODO: add to ComplaintForm Frgment
+        //TODO: add to ComplaintFormFrgment
         val extras = intent.extras
         val message = extras!!.getString(Intent.EXTRA_TEXT)
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()

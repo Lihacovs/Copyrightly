@@ -154,5 +154,49 @@
     <!--res.layout.fragment_complain-->
     <string name="fragment_complain_platform_selection">Please select a platform where your copyrighted work was infringed:</string>
     <string name="fragment_complain_abuse_notice">This is legal claim submission. Any abusive action can lead to your account termination or legal consequences.</string>
-    <string name="fragment_complain_form_ask_url">Please submit a URL link for your infringed content</string>
+    <string name="fragment_complain_form_ask_url">Copyrights Infringement Form</string>
+    <string name="fragment_complain_form_infringed_video">1. Infringed video</string>
+    <string name="fragment_complain_form_my_content">2. My content</string>
+    <string name="fragment_complain_form_platform">3. Platform</string>
+    <string name="fragment_complain_form_legal_agreement">4. Legal agreement</string>
+    <string name="fragment_complain_form_add_infringed_url">Please add infringed URL here</string>
+    <string name="fragment_complain_form_infringed_location">Location of infringed content:</string>
+    <string name="fragment_complain_form_URL_to_be_removed">URL of video to be removed:</string>
+    <string name="fragment_complain_form_type_of_work">Type of work:</string>
+    <string name="fragment_complain_form_title_of_work">Title of work:</string>
+    <string name="fragment_complain_form_add_title_of_work">Please enter a title of your work</string>
+    <string name="fragment_complain_form__social_media_platform">Social media platform:</string>
+    <string name="fragment_complain_form_legal_agreement_1">I have a good faith belief that the use of the material in the manner complained of is not authorized by the copyright owner, its agent, or the law.</string>
+    <string name="fragment_complain_form_legal_agreement_2">The information in this notification is accurate, and under penalty of perjury, I am the owner, or an agent authorized to act on behalf of the owner, of an exclusive right that is allegedly infringed.</string>
+    <string name="fragment_complain_form_legal_agreement_3">I understand that abuse of this tool, such as submitting removal requests for content I do not own, may result in termination of my YouTube account.</string>
+    <string name="fragment_complain_form_signature">Signature(required):</string>
+    <string name="fragment_complain_form_submit">Submit complaint</string>
+
+
+    <string-array name="fragment_complaint_form_infringed_location_array">
+        <item>Entire Video</item>
+        <item>Timestamps</item>
+        <item>Custom Thumbnail</item>
+        <item>Description</item>
+        <item>Links to allegedly infringing material</item>
+    </string-array>
+
+    <string-array name="fragment_complaint_form_types_array">
+        <item>Video</item>
+        <item>Audio</item>
+        <item>Software</item>
+        <item>Artwork</item>
+        <item>Live performance</item>
+        <item>Copyrighted Logo</item>
+        <item>Other</item>
+    </string-array>
+
+    <string-array name="fragment_complaint_form_platforms_array">
+        <item>YouTube</item>
+        <item>TikTok</item>
+        <item>Twitter</item>
+        <item>Facebook</item>
+        <item>Instagram</item>
+    </string-array>
+
 </resources>

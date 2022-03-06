@@ -21,7 +21,7 @@ fun bindImageFromUrl(view: ImageView, imageUrl: String?) {
 fun bindProfileImageFromUrl(view: ImageView, imageUrl: String?) {
         Glide.with(view.context)
             .load(imageUrl)
-            .apply(RequestOptions.placeholderOf(R.drawable.ic_copyright_98570))
+            .apply(RequestOptions.placeholderOf(R.drawable.ic_copyright_white_24px))
             .circleCrop()
             .transition(DrawableTransitionOptions.withCrossFade())
             .into(view)

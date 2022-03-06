@@ -46,7 +46,6 @@ class ComplainFragment : BaseFragment() {
         })
 
         binding.setClickListenerYouTube {
-            showSnackbar("Complain on YouTube", it)
             findNavController().navigate(R.id.nav_complain_form_1)
         }
 
